@@ -3,13 +3,21 @@ package com.zhadan;
 import com.zhadan.bean.User;
 import org.apache.log4j.Logger;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created by azhadan on 7/30/13.
@@ -25,7 +33,10 @@ public class UserServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOGGER.info("Session id " + req.getSession().getId());
-        LOGGER.info("Cookie " + req.getCookies().toString());
+        Cookie[] cookies = req.getCookies();
+        for (Cookie cookie : cookies) {
+            LOGGER.info("Cookie " + cookie.getName() + " / " + cookie.getValue());
+        }
         RequestDispatcher rd;
         String login = req.getParameter("login");
         String password = req.getParameter("password");
@@ -59,8 +70,11 @@ public class UserServlet extends HttpServlet {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jkinopoisk", "root", "sadmin");
+            //Class.forName("com.mysql.jdbc.Driver");
+            //connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jkinopoisk", "root", "sadmin");
+            Context ctx = new InitialContext();
+            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jkinopoisk");
+            connection = ds.getConnection();
             ps = connection.prepareStatement(SELECT_SQL);
             ps.setString(1, login);
             rs = ps.executeQuery();
@@ -72,8 +86,10 @@ public class UserServlet extends HttpServlet {
                 return user;
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             LOGGER.error("Smth bad happens");
-        } catch (ClassNotFoundException e) {
+        } catch (NamingException e) {
+            e.printStackTrace();
             LOGGER.error("Smth bad happens");
         } finally {
             try {

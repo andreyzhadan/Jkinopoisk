@@ -1,0 +1,23 @@
+<Context>
+    <Resource
+            name="jdbc/jkinopoisk"
+            auth="Container"
+            type="javax.sql.DataSource"
+
+            url="jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com:3306/jkinopoisk?autoReconnect=true"
+            username="andrey91zh"
+            password="Jkinopoisk1111"
+
+            driverClassName="com.mysql.jdbc.Driver"
+
+            maxActive="20"
+            maxIdle="1"
+            maxWait="10000"
+            removeAbandoned="true"
+            removeAbandonedTimeout="60"
+            logAbandoned="true"
+
+            validationQuery="SELECT 1"
+            testOnBorrow="true"
+            />
+</Context>

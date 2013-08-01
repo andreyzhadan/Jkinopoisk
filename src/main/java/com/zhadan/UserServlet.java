@@ -19,14 +19,13 @@ public class UserServlet extends HttpServlet {
     private static final Logger LOGGER = Logger.getLogger(UserServlet.class.getName());
     private static final String SELECT_SQL = "select * from user where login=?";
 
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("jkinopoisk/index.jsp").forward(req, resp);
     }
 
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Post " + req.getSession().getId());
+        LOGGER.info("Session id " + req.getSession().getId());
+        LOGGER.info("Cookie " + req.getCookies().toString());
         RequestDispatcher rd;
         String login = req.getParameter("login");
         String password = req.getParameter("password");

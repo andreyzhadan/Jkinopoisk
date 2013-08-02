@@ -1,10 +1,14 @@
 package com.zhadan.bean;
 
+import javax.persistence.Entity;
+
 /**
  * Created by azhadan on 7/30/13.
  */
+@Entity
 public class User {
     private String login;
+
     private String password;
 
     public User() {

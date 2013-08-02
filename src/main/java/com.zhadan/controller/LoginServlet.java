@@ -1,4 +1,4 @@
-package com.zhadan;
+package com.zhadan.controller;
 
 import com.zhadan.bean.User;
 import com.zhadan.dao.UserDao;
@@ -16,14 +16,16 @@ import java.io.IOException;
 /**
  * Created by azhadan on 7/30/13.
  */
-public class UserServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = -6500557339421743748L;
-    private static final Logger logger = Logger.getLogger(UserServlet.class.getName());
+    private static final Logger logger = Logger.getLogger(LoginServlet.class.getName());
+    private static final String INDEX_PAGE = "jkinopoisk/index.jsp";
     private final UserDao userDao = new UserDaoImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("jkinopoisk/index.jsp").forward(req, resp);
+        //req.getRequestDispatcher("jkinopoisk/index.jsp").forward(req, resp);
+        resp.sendRedirect(INDEX_PAGE);
     }
 
     @Override
@@ -39,8 +41,9 @@ public class UserServlet extends HttpServlet {
         if (user == null) {
             rd = req.getRequestDispatcher("login.jsp");
         } else {
+            req.getSession().setAttribute("login", user.getLogin());
             req.getSession().setAttribute("user", user);
-            rd = req.getRequestDispatcher("jkinopoisk/index.jsp");
+            rd = req.getRequestDispatcher(INDEX_PAGE);
         }
         rd.forward(req, resp);
     }

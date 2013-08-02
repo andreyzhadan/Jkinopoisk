@@ -1,4 +1,4 @@
-package com.zhadan;
+package com.zhadan.controller;
 
 import com.zhadan.bean.User;
 import org.apache.log4j.Logger;

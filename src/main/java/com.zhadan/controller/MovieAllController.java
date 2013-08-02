@@ -21,7 +21,7 @@ import static org.apache.log4j.Logger.getLogger;
  * Time: 22:33
  */
 public class MovieAllController extends HttpServlet {
-    private static final String ATTRIBUTE_MOVIE_LIST = "moviesList";
+    private static final String ATTRIBUTE_MOVIE_LIST = "movies";
     private static final String PAGE_OK = "/jkinopoisk/movies.jsp";
     private static final String PAGE_ERROR = "/jkinopoisk/error.jsp";
     private static final Logger logger = getLogger(MovieAllController.class.getName());

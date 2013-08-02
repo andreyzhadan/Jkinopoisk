@@ -9,6 +9,8 @@
 <body>
 <h2>Login page </h2>
 
+<a href="/register.jsp">Register new user</a>
+
 <form action="/jkinopoisk" method="post">
     <label>Name:
         <input type="text" name="login"/>

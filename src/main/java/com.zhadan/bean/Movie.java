@@ -1,5 +1,8 @@
 package com.zhadan.bean;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.List;
 
 /**
@@ -8,30 +11,27 @@ import java.util.List;
  * Date: 01.08.13
  * Time: 22:35
  */
+@Entity
 public class Movie {
+    @Id
+    @GeneratedValue
     private int id;
-    private String name;
-    private String russianName;
-    private int year;
+
     private String country;
-    private float rating;
+
+    private String name;
+
     private String slogan;
+
+    private float rating;
+
+    private String russianName;
+
+    private int year;
+
     private List<Actor> actors;
 
     public Movie() {
-
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("id = ");
-        builder.append(this.getId());
-        builder.append(" name = ");
-        builder.append(this.getName());
-        builder.append(" year = ");
-        builder.append(this.getYear());
-        return builder.toString();
     }
 
     public int getId() {
@@ -96,5 +96,17 @@ public class Movie {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("id = ");
+        builder.append(this.getId());
+        builder.append(" name = ");
+        builder.append(this.getName());
+        builder.append(" year = ");
+        builder.append(this.getYear());
+        return builder.toString();
     }
 }

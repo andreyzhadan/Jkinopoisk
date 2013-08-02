@@ -2,26 +2,48 @@
         "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
+
     <filter>
         <filter-name>userCheckFilter</filter-name>
-        <filter-class>com.zhadan.LoginFilter</filter-class>
+        <filter-class>com.zhadan.controller.LoginFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>userCheckFilter</filter-name>
         <url-pattern>/jkinopoisk</url-pattern>
     </filter-mapping>
+
     <servlet>
         <servlet-name>userServlet</servlet-name>
-        <servlet-class>com.zhadan.UserServlet</servlet-class>
+        <servlet-class>com.zhadan.controller.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userServlet</servlet-name>
         <url-pattern>/jkinopoisk</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>movieController</servlet-name>
+        <servlet-class>com.zhadan.controller.MovieAllController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>movieController</servlet-name>
+        <url-pattern>/jkinopoisk/movies</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>logout</servlet-name>
+        <servlet-class>com.zhadan.controller.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
     <resource-ref>
         <description>Jkinopoisk Datasource example server.xml</description>
         <res-ref-name>jdbc/jkinopoisk</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>
+
 </web-app>

@@ -4,10 +4,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Logout page</title>
+    <title>Register page</title>
 </head>
 <body>
-<h2>Logout page </h2>
-
+<h2>Register page </h2>
 </body>
 </html>

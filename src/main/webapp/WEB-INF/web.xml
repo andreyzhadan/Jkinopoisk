@@ -4,7 +4,7 @@
 <web-app>
     <filter>
         <filter-name>userCheckFilter</filter-name>
-        <filter-class>com.zhadan.UserCheckFilter</filter-class>
+        <filter-class>com.zhadan.LoginFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>userCheckFilter</filter-name>
@@ -19,7 +19,7 @@
         <url-pattern>/jkinopoisk</url-pattern>
     </servlet-mapping>
     <resource-ref>
-        <description>Jkinopoisk Datasource example</description>
+        <description>Jkinopoisk Datasource example server.xml</description>
         <res-ref-name>jdbc/jkinopoisk</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>

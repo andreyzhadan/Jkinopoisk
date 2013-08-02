@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -30,10 +31,11 @@ public class LoginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse resp = (HttpServletResponse) response;
         HttpSession httpSession = req.getSession();
         User userFromSession = (User) httpSession.getAttribute("user");
         if (userFromSession == null && !req.getMethod().equals("POST")) {
-            req.getRequestDispatcher(LOGIN_PAGE).forward(request, response);
+            resp.sendRedirect(LOGIN_PAGE);
             return;
         }
         chain.doFilter(request, response);

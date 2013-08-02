@@ -7,17 +7,20 @@
     <title>Login page</title>
 </head>
 <body>
-<h2>Login page </h2>
+<h2 align="center">Login page </h2>
 
 <a href="/register.jsp">Register new user</a>
 
 <form action="/jkinopoisk" method="post">
-    <label>Name:
-        <input type="text" name="login"/>
-    </label>
-    <label>Password:
-        <input type="password" name="password"/>
-    </label>
+    <div>
+        <label>Name:
+            <input type="text" name="login"/>
+        </label></div>
+    <div>
+        <label>Password:
+            <input type="password" name="password"/>
+        </label>
+    </div>
     <input type="submit" value="Login"/>
 </form>
 

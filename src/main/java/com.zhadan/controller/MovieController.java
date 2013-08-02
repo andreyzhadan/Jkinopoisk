@@ -22,7 +22,7 @@ import static org.apache.log4j.Logger.getLogger;
 public class MovieController extends HttpServlet {
     private static final String PARAM_ID = "id";
     private static final String ATTRIBUTE_MOVIE = "movie";
-    private static final String PAGE_OK = "/jkinopoisk/movies.jsp";
+    private static final String PAGE_OK = "/jkinopoisk/movie.jsp";
     private static final String PAGE_ERROR = "/jkinopoisk/error.jsp";
     private static final Logger logger = getLogger(MovieAllController.class.getName());
     private MovieDao movieDao = new MovieDaoImpl();
@@ -35,14 +35,14 @@ public class MovieController extends HttpServlet {
             Movie movie = movieDao.selectById(id);
             if (movie != null) {
                 req.setAttribute(ATTRIBUTE_MOVIE, movie);
-                logger.debug("set attribute " + ATTRIBUTE_MOVIE + movie);
+                logger.info("set attribute " + ATTRIBUTE_MOVIE + movie);
                 req.getRequestDispatcher(PAGE_OK).forward(req, resp);
-                logger.debug("dispatched to page " + PAGE_OK);
+                logger.info("redirected to page " + PAGE_OK);
                 return;
             }
         }
         //ERROR
         resp.sendRedirect(PAGE_ERROR);
-        logger.debug("redirect to page " + PAGE_ERROR);
+        logger.info("redirect to page " + PAGE_ERROR);
     }
 }

@@ -20,10 +20,43 @@ import static org.apache.log4j.Logger.getLogger;
 public class UserDaoImpl implements UserDao {
     private static final Logger logger = getLogger(UserDaoImpl.class.getName());
     private static final String SELECT_SQL = "select * from user where login=?";
+    private static final String INSERT_SQL = "insert into user (login,password) values (?,?)";
 
     @Override
     public void insert(User user) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Context ctx = new InitialContext();
+            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jkinopoisk");
+            connection = ds.getConnection();
 
+            ps = connection.prepareStatement(INSERT_SQL);
+            ps.setString(1, user.getLogin());
+            ps.setString(2, user.getPassword());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.error("Something bad happens");
+        } catch (NamingException e) {
+            e.printStackTrace();
+            logger.error("Something bad happens");
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                logger.error("Cannot closeAllConnections RS && STMT");
+            }
+        }
     }
 
     @Override
@@ -49,6 +82,7 @@ public class UserDaoImpl implements UserDao {
                 logger.info(user);
                 return user;
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error("Something bad happens");

@@ -9,7 +9,7 @@
 <body>
 <%@include file="header.jsp" %>
 
-<h2>Index page</h2>
+<h2 align="center">Index page</h2>
 
 <div>
     <a href="/jkinopoisk/movies">Movies page</a>

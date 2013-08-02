@@ -13,6 +13,24 @@
     </filter-mapping>
 
     <servlet>
+        <servlet-name>moviesController</servlet-name>
+        <servlet-class>com.zhadan.controller.MovieAllController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>moviesController</servlet-name>
+        <url-pattern>/jkinopoisk/movies</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>movieController</servlet-name>
+        <servlet-class>com.zhadan.controller.MovieController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>movieController</servlet-name>
+        <url-pattern>/jkinopoisk/movie</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>userServlet</servlet-name>
         <servlet-class>com.zhadan.controller.LoginServlet</servlet-class>
     </servlet>
@@ -22,12 +40,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>movieController</servlet-name>
-        <servlet-class>com.zhadan.controller.MovieAllController</servlet-class>
+        <servlet-name>register</servlet-name>
+        <servlet-class>com.zhadan.controller.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>movieController</servlet-name>
-        <url-pattern>/jkinopoisk/movies</url-pattern>
+        <servlet-name>register</servlet-name>
+        <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
     <servlet>

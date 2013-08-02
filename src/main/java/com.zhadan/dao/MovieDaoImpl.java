@@ -1,7 +1,6 @@
 package com.zhadan.dao;
 
 import com.zhadan.bean.Movie;
-import com.zhadan.bean.User;
 import org.apache.log4j.Logger;
 
 import javax.naming.Context;
@@ -26,6 +25,7 @@ import static org.apache.log4j.Logger.getLogger;
 public class MovieDaoImpl implements MovieDao {
     private static final Logger logger = getLogger(MovieDaoImpl.class.getName());
     private static final String SELECT_ALL = "select * from movie";
+    private static final String SELECT_BY_ID = "select * from movie where id=?";
 
     @Override
     public List<Movie> selectAll() {
@@ -46,6 +46,7 @@ public class MovieDaoImpl implements MovieDao {
                 movie.setCountry(rs.getString("country"));
                 movie.setName(rs.getString("name"));
                 movie.setRussianName(rs.getString("russianName"));
+                movie.setRating(rs.getFloat("rating"));
                 movie.setSlogan(rs.getString("slogan"));
                 movie.setYear(rs.getInt("year"));
                 logger.info(movie);
@@ -77,6 +78,49 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public Movie selectById(Integer id) {
-        return null;
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Movie movie = new Movie();
+        try {
+            Context ctx = new InitialContext();
+            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jkinopoisk");
+            connection = ds.getConnection();
+
+            ps = connection.prepareStatement(SELECT_BY_ID);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                movie.setId(rs.getInt("id"));
+                movie.setCountry(rs.getString("country"));
+                movie.setName(rs.getString("name"));
+                movie.setRussianName(rs.getString("russianName"));
+                movie.setRating(rs.getFloat("rating"));
+                movie.setSlogan(rs.getString("slogan"));
+                movie.setYear(rs.getInt("year"));
+                logger.info(movie);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.error("Something bad happens");
+        } catch (NamingException e) {
+            e.printStackTrace();
+            logger.error("Something bad happens");
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                logger.error("Cannot closeAllConnections RS && STMT");
+            }
+        }
+        return movie;
     }
 }

@@ -32,13 +32,14 @@ public class MovieAllController extends HttpServlet {
         try {
             List<Movie> movieList = movieDao.selectAll();
             req.setAttribute(ATTRIBUTE_MOVIE_LIST, movieList);
-            logger.debug("set attribute " + ATTRIBUTE_MOVIE_LIST + " with " + movieList.size() + " movies");
+            logger.info("set attribute " + ATTRIBUTE_MOVIE_LIST + " with " + movieList.size() + " movies");
             req.getRequestDispatcher(PAGE_OK).forward(req, resp);
-            logger.debug("dispatched to page " + PAGE_OK);
+            logger.info("dispatched to page " + PAGE_OK);
         } catch (Exception ex) {
+
             //FAIL
             resp.sendRedirect(PAGE_ERROR);
-            logger.debug("redirect to page " + PAGE_ERROR);
+            logger.info("redirect to page " + PAGE_ERROR);
         }
     }
 }

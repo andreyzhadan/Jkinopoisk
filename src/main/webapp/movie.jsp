@@ -1,4 +1,5 @@
 <%@ page import="com.zhadan.bean.Movie" %>
+<%@ taglib prefix="customTags" tagdir="/WEB-INF/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: azhadan
@@ -17,30 +18,8 @@
     <div class="page-header" align="center">
         <h3>Movie page</h3>
     </div>
-    <ul class="list-group">
-        <%Movie movie = (Movie) request.getAttribute("movie");%>
-        <li class="list-group-item">
-            Id <%=movie.getId()%>
-        </li>
-        <li class="list-group-item">
-            Name <%=movie.getName()%>
-        </li>
-        <li class="list-group-item">
-            Russian name <%=movie.getRussianName()%>
-        </li>
-        <li class="list-group-item">
-            Rating <%=movie.getRating()%>
-        </li>
-        <li class="list-group-item">
-            Slogan <%=movie.getSlogan()%>
-        </li>
-        <li class="list-group-item">
-            Year <%=movie.getYear()%>
-        </li>
-        <li class="list-group-item">
-            Country <%=movie.getCountry()%>
-        </li>
-    </ul>
+    <%Movie movie = (Movie) request.getAttribute("movie");%>
+    <customTags:movieTag movie="<%=movie%>"/>
 </div>
 </body>
 </html>

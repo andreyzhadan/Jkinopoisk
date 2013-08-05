@@ -10,7 +10,7 @@ import java.util.List;
  * Date: 01.08.13
  * Time: 22:33
  */
-public interface MovieDao {
+public interface MovieDao {    //the same notes as in ActorDao
     public void addMovie(Movie movie);
 
     public List<Movie> listMovies();

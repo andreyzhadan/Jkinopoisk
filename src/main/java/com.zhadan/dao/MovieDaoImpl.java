@@ -29,7 +29,7 @@ public class MovieDaoImpl implements MovieDao {
     private static final String SELECT_ALL = "select * from movie";
     private static final String SELECT_BY_ID = "select * from movie where id=?";
 
-    public MovieDaoImpl() {
+    public MovieDaoImpl() {  //excessive constructor
     }
 
     @Override
@@ -62,7 +62,7 @@ public class MovieDaoImpl implements MovieDao {
                 movie.setYear(rs.getInt("year"));
                 movies.add(movie);
             }
-            logger.info(Arrays.asList(movies));
+            logger.info(Arrays.asList(movies));         // logger.debug() fits better here
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error("Something bad happens");

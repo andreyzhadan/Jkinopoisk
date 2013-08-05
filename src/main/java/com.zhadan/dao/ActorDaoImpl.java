@@ -38,7 +38,7 @@ public class ActorDaoImpl implements ActorDao {
     @Override
     public List<Actor> listActors() {
         Connection connection = null;
-        PreparedStatement ps = null;
+        PreparedStatement ps = null;  // do we need prepared statement here? Simple Statement is a little bit faster
         ResultSet rs = null;
         List<Actor> actors = new ArrayList<Actor>();
         try {

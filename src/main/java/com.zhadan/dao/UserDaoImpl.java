@@ -46,7 +46,7 @@ public class UserDaoImpl implements UserDao {
             try {
                 if (rs != null) {
                     rs.close();
-                }
+                }                                                  // looks like this resources cleanup can be extracted to separate method, WDYT?
                 if (ps != null) {
                     ps.close();
                 }

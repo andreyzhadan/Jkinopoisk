@@ -10,7 +10,7 @@ import java.util.List;
  * Date: 8/4/13
  * Time: 1:17 PM
  */
-public interface ActorDao {
+public interface ActorDao { //do we need to update actors?
     //throws own exceptions
     public void addActor(Actor actor);
 
@@ -18,5 +18,5 @@ public interface ActorDao {
 
     public Actor findById(Integer id);
 
-    public void removeActor(Integer id);
+    public void removeActor(Integer id);    // I think this method should return boolean(true if actor wa removed)
 }

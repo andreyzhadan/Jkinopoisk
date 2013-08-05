@@ -2,11 +2,11 @@ package com.zhadan.controller;
 
 import com.zhadan.bean.Movie;
 import com.zhadan.dao.MovieDao;
-import com.zhadan.dao.MovieDaoImpl;
+import com.zhadan.ownIoC.DependencyInjectionServlet;
+import com.zhadan.ownIoC.ZhadanInject;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -19,20 +19,22 @@ import static org.apache.log4j.Logger.getLogger;
  * Date: 01.08.13
  * Time: 22:48
  */
-public class MovieController extends HttpServlet {
+public class MovieServlet extends DependencyInjectionServlet {
+    private static final long serialVersionUID = -6777834847092077725L;
     private static final String PARAM_ID = "id";
     private static final String ATTRIBUTE_MOVIE = "movie";
-    private static final String PAGE_OK = "/jkinopoisk/movie.jsp";
-    private static final String PAGE_ERROR = "/jkinopoisk/error.jsp";
-    private static final Logger logger = getLogger(MovieAllController.class.getName());
-    private MovieDao movieDao = new MovieDaoImpl();
+    private static final String PAGE_OK = "/movie.jsp";
+    private static final String PAGE_ERROR = "/error.jsp";
+    private static final Logger logger = getLogger(MovieServlet.class.getName());
+    @ZhadanInject("movieDao")
+    private MovieDao movieDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idStr = req.getParameter(PARAM_ID);
         if (idStr != null) {
             final Integer id = Integer.valueOf(idStr);
-            Movie movie = movieDao.selectById(id);
+            Movie movie = movieDao.findById(id);
             if (movie != null) {
                 req.setAttribute(ATTRIBUTE_MOVIE, movie);
                 logger.info("set attribute " + ATTRIBUTE_MOVIE + movie);

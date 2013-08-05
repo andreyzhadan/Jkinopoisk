@@ -7,15 +7,12 @@
     <title>Index page</title>
 </head>
 <body>
-<%@include file="header.jsp" %>
+<div class="container">
+    <%@include file="header.jsp" %>
 
-<h2 align="center">Index page</h2>
-
-<div>
-    <a href="/jkinopoisk/movies">Movies page</a>
-</div>
-<div>
-    <a href="/jkinopoisk/actors">Actors page</a>
+    <div class="page-header" align="center">
+        <h3>Home page</h3>
+    </div>
 </div>
 </body>
 </html>

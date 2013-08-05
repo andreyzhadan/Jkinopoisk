@@ -1,6 +1,6 @@
 package com.zhadan.dao;
 
-import com.zhadan.bean.User;
+import com.zhadan.bean.Actor;
 import org.apache.log4j.Logger;
 
 import javax.naming.Context;
@@ -11,78 +11,53 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.apache.log4j.Logger.getLogger;
 
 /**
- * Created by azhadan on 8/1/13.
+ * Created with IntelliJ IDEA.
+ * User: azhadan
+ * Date: 8/4/13
+ * Time: 1:17 PM
  */
-public class UserDaoImpl implements UserDao {
-    private static final Logger logger = getLogger(UserDaoImpl.class.getName());
-    private static final String SELECT_SQL = "select * from user where login=?";
-    private static final String INSERT_SQL = "insert into user (login,password) values (?,?)";
+public class ActorDaoImpl implements ActorDao {
+    private static final Logger logger = getLogger(ActorDaoImpl.class.getName());
+    private static final String SELECT_ALL = "select * from actor";
+    private static final String SELECT_BY_ID = "select * from actor where id=?";
 
-    @Override
-    public void addUser(User user) {
-        Connection connection = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            Context ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jkinopoisk");
-            connection = ds.getConnection();
-
-            ps = connection.prepareStatement(INSERT_SQL);
-            ps.setString(1, user.getLogin());
-            ps.setString(2, user.getPassword());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            logger.error("Something bad happens");
-        } catch (NamingException e) {
-            e.printStackTrace();
-            logger.error("Something bad happens");
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
-                if (connection != null) {
-                    connection.close();
-                }
-            } catch (SQLException e) {
-                logger.error("Cannot closeAllConnections RS && STMT");
-            }
-        }
+    public ActorDaoImpl() {
     }
 
     @Override
-    public User getUserByLogin(String login) {
+    public void addActor(Actor actor) {
+    }
+
+    @Override
+    public List<Actor> listActors() {
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        List<Actor> actors = new ArrayList<Actor>();
         try {
-            //Class.forName("com.mysql.jdbc.Driver");
-            //connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jkinopoisk", "root", "sadmin");
-
             Context ctx = new InitialContext();
             DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jkinopoisk");
             connection = ds.getConnection();
 
-            ps = connection.prepareStatement(SELECT_SQL);
-            ps.setString(1, login);
+            ps = connection.prepareStatement(SELECT_ALL);
             rs = ps.executeQuery();
-            if (rs.next()) {
-                User user = new User();
-                user.setLogin(rs.getString("login"));
-                user.setPassword(rs.getString("password"));
-                logger.info(user);
-                return user;
+            while (rs.next()) {
+                Actor actor = new Actor();
+                actor.setId(rs.getInt("id"));
+                actor.setCountry(rs.getString("country"));
+                actor.setFirstName(rs.getString("firstName"));
+                actor.setLastName(rs.getString("lastName"));
+                actor.setDate(rs.getInt("date"));
+                actors.add(actor);
             }
-
+            logger.info(Arrays.asList(actors));
         } catch (SQLException e) {
             e.printStackTrace();
             logger.error("Something bad happens");
@@ -104,22 +79,56 @@ public class UserDaoImpl implements UserDao {
                 logger.error("Cannot closeAllConnections RS && STMT");
             }
         }
-        return null;
+        return actors;
     }
 
     @Override
-    public User validateUser(String login, String password) {
-        if (login == null || password == null) {
-            return null;
+    public Actor findById(Integer id) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Actor actor = new Actor();
+        try {
+            Context ctx = new InitialContext();
+            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jkinopoisk");
+            connection = ds.getConnection();
+
+            ps = connection.prepareStatement(SELECT_BY_ID);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                actor.setId(rs.getInt("id"));
+                actor.setCountry(rs.getString("country"));
+                actor.setFirstName(rs.getString("firstName"));
+                actor.setLastName(rs.getString("lastName"));
+                actor.setDate(rs.getInt("date"));
+                logger.info(actor);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.error("Something bad happens");
+        } catch (NamingException e) {
+            e.printStackTrace();
+            logger.error("Something bad happens");
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                logger.error("Cannot closeAllConnections RS && STMT");
+            }
         }
-        //User user = users.get(login);
-        User user = getUserByLogin(login);
-        if (user == null) {
-            return null;
-        }
-        if (!user.getPassword().equals(password.trim())) {
-            return null;
-        }
-        return user;
+        return actor;
+    }
+
+    @Override
+    public void removeActor(Integer id) {
     }
 }

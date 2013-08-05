@@ -11,8 +11,11 @@ import java.util.List;
  * Time: 22:33
  */
 public interface MovieDao {
-    //throws own exceptions
-    public List<Movie> selectAll();
+    public void addMovie(Movie movie);
 
-    public Movie selectById(Integer id);
+    public List<Movie> listMovies();
+
+    public Movie findById(Integer id);
+
+    public void removeMovie(Integer id);
 }

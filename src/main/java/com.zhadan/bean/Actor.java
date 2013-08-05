@@ -1,8 +1,6 @@
 package com.zhadan.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -14,17 +12,12 @@ import java.util.List;
 @Entity
 public class Actor {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String country;
-
     private int date;
-
     private String firstName;
-
     private String lastName;
-
     private List<Movie> movies;
 
     public Actor() {

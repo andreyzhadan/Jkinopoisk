@@ -1,22 +1,30 @@
 package com.zhadan.bean;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Created by azhadan on 7/30/13.
  */
 @Entity
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String login;
-
     private String password;
 
     public User() {
     }
 
-    public User(String login, String password) {
-        this.login = login;
-        this.password = password;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLogin() {

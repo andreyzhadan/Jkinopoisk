@@ -2,59 +2,90 @@
         "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
+    <welcome-file-list>
+        <welcome-file>/jkinopoisk/home.jsp</welcome-file>
+    </welcome-file-list>
+
+    <context-param>
+        <param-name>appCtxPath</param-name>
+        <param-value>/zhadanAppContext.xml</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>appCtxClass</param-name>
+        <param-value>com.zhadan.ownIoC.AppContextDom</param-value>
+    </context-param>
 
     <filter>
-        <filter-name>userCheckFilter</filter-name>
-        <filter-class>com.zhadan.controller.LoginFilter</filter-class>
+        <filter-name>jKinopoiskFilter</filter-name>
+        <filter-class>com.zhadan.controller.JkinopoiskFilter</filter-class>
     </filter>
     <filter-mapping>
-        <filter-name>userCheckFilter</filter-name>
-        <url-pattern>/jkinopoisk</url-pattern>
+        <filter-name>jKinopoiskFilter</filter-name>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
 
     <servlet>
         <servlet-name>moviesController</servlet-name>
-        <servlet-class>com.zhadan.controller.MovieAllController</servlet-class>
+        <servlet-class>com.zhadan.controller.MoviesServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>moviesController</servlet-name>
-        <url-pattern>/jkinopoisk/movies</url-pattern>
+        <url-pattern>/movies</url-pattern>
     </servlet-mapping>
 
     <servlet>
         <servlet-name>movieController</servlet-name>
-        <servlet-class>com.zhadan.controller.MovieController</servlet-class>
+        <servlet-class>com.zhadan.controller.MovieServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>movieController</servlet-name>
-        <url-pattern>/jkinopoisk/movie</url-pattern>
+        <url-pattern>/movie</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>userServlet</servlet-name>
-        <servlet-class>com.zhadan.controller.LoginServlet</servlet-class>
+        <servlet-name>actorsController</servlet-name>
+        <servlet-class>com.zhadan.controller.ActorsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>userServlet</servlet-name>
-        <url-pattern>/jkinopoisk</url-pattern>
+        <servlet-name>actorsController</servlet-name>
+        <url-pattern>/actors</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>register</servlet-name>
-        <servlet-class>com.zhadan.controller.RegisterServlet</servlet-class>
+        <servlet-name>actorController</servlet-name>
+        <servlet-class>com.zhadan.controller.ActorServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>register</servlet-name>
-        <url-pattern>/register</url-pattern>
+        <servlet-name>actorController</servlet-name>
+        <url-pattern>/actor</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>logout</servlet-name>
-        <servlet-class>com.zhadan.controller.LogoutServlet</servlet-class>
+        <servlet-name>signInServlet</servlet-name>
+        <servlet-class>com.zhadan.controller.SignInServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>logout</servlet-name>
-        <url-pattern>/logout</url-pattern>
+        <servlet-name>signInServlet</servlet-name>
+        <url-pattern>/signIn</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>signUpServlet</servlet-name>
+        <servlet-class>com.zhadan.controller.SignUpServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>signUpServlet</servlet-name>
+        <url-pattern>/signUp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>signOutServlet</servlet-name>
+        <servlet-class>com.zhadan.controller.SignOutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>signOutServlet</servlet-name>
+        <url-pattern>/signOut</url-pattern>
     </servlet-mapping>
 
     <resource-ref>

@@ -2,6 +2,7 @@ package com.zhadan.bean;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @Entity
 public class Movie {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String country;

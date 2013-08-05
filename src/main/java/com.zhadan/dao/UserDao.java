@@ -6,7 +6,7 @@ import com.zhadan.bean.User;
  * Created by azhadan on 8/1/13.
  */
 public interface UserDao {
-    public void insert(User user);
+    public void addUser(User user);
 
     public User getUserByLogin(String login);
 

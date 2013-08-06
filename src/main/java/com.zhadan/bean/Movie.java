@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -17,22 +18,25 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private String country;
-
     private String name;
-
     private String slogan;
-
     private float rating;
-
     private String russianName;
-
     private int year;
-
+    private String picture;
     private List<Actor> actors;
 
     public Movie() {
+
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public int getId() {

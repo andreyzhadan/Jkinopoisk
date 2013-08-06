@@ -11,7 +11,7 @@
         Last name <%=actor.getLastName()%>
     </li>
     <li class="list-group-item">
-        Year <%=actor.getDate()%>
+        Year <%=actor.getBirthday()%>
     </li>
     <li class="list-group-item">
         Country <%=actor.getCountry()%>

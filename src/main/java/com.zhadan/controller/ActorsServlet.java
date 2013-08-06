@@ -32,7 +32,7 @@ public class ActorsServlet extends DependencyInjectionServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            List<Actor> actorList = actorDao.listActors();
+            List<Actor> actorList = actorDao.list();
             req.setAttribute(ATTRIBUTE_ACTOR_LIST, actorList);
             logger.info("set attribute " + ATTRIBUTE_ACTOR_LIST + " with " + actorList.size() + " movies");
             req.getRequestDispatcher(PAGE_OK).forward(req, resp);

@@ -34,7 +34,7 @@ public class ActorServlet extends DependencyInjectionServlet {
         String idStr = req.getParameter(PARAM_ID);
         if (idStr != null) {
             final Integer id = Integer.valueOf(idStr);
-            Actor actor = actorDao.findById(id);
+            Actor actor = actorDao.find(id);
             if (actor != null) {
                 req.setAttribute(ATTRIBUTE_ACTOR, actor);
                 logger.info("set attribute " + ATTRIBUTE_ACTOR + actor);

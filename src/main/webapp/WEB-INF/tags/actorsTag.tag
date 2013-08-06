@@ -29,7 +29,7 @@
             <%=actor.getLastName()%>
         </td>
         <td>
-            <%=actor.getDate()%>
+            <%=actor.getBirthday()%>
         </td>
         <td>
             <%=actor.getCountry()%>

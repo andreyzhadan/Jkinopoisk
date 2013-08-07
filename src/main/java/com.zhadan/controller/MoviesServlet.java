@@ -32,7 +32,7 @@ public class MoviesServlet extends DependencyInjectionServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            List<Movie> movieList = movieDao.listMovies();
+            List<Movie> movieList = movieDao.list();
             req.setAttribute(ATTRIBUTE_MOVIE_LIST, movieList);
             logger.info("set attribute " + ATTRIBUTE_MOVIE_LIST + " with " + movieList.size() + " movies");
             req.getRequestDispatcher(PAGE_OK).forward(req, resp);

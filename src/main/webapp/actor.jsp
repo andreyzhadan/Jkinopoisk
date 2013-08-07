@@ -1,4 +1,5 @@
 <%@ page import="com.zhadan.bean.Actor" %>
+<%@ taglib prefix="customTags" tagdir="/WEB-INF/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: azhadan
@@ -17,24 +18,8 @@
     <div class="page-header" align="center">
         <h3>Actor page</h3>
     </div>
-    <ul class="list-group">
-        <%Actor actor = (Actor) request.getAttribute("actor");%>
-        <li class="list-group-item">
-            Id <%=actor.getId()%>
-        </li>
-        <li class="list-group-item">
-            First name <%=actor.getFirstName()%>
-        </li>
-        <li class="list-group-item">
-            Last name <%=actor.getLastName()%>
-        </li>
-        <li class="list-group-item">
-            Year <%=actor.getDate()%>
-        </li>
-        <li class="list-group-item">
-            Country <%=actor.getCountry()%>
-        </li>
-    </ul>
+    <%Actor actor = (Actor) request.getAttribute("actor");%>
+    <customTags:actorTag actor="<%=actor%>"/>
 </div>
 </div>
 </body>

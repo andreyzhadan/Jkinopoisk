@@ -15,20 +15,28 @@ public class Actor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String country;
-    private int date;
+    private int birthday;
     private String firstName;
     private String lastName;
+    private String picture;
     private List<Movie> movies;
 
     public Actor() {
     }
 
-    public int getId() {
-        return id;
+    public Actor(String firstName, String lastName, int birthday, String country) {
+        this.country = country;
+        this.birthday = birthday;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public String getCountry() {
@@ -37,30 +45,6 @@ public class Actor {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public int getDate() {
-        return date;
-    }
-
-    public void setDate(int date) {
-        this.date = date;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public List<Movie> getMovies() {
@@ -79,8 +63,40 @@ public class Actor {
         builder.append(" name = ");
         builder.append(this.getFirstName());
         builder.append(this.getLastName());
-        builder.append(" date = ");
-        builder.append(this.getDate());
+        builder.append(" birthday = ");
+        builder.append(this.getBirthday());
         return builder.toString();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(int birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

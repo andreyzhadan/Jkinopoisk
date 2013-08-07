@@ -1,14 +1,16 @@
 package com.zhadan.dao;
 
 import com.zhadan.bean.User;
+import com.zhadan.exceptions.DAOException;
 
 /**
  * Created by azhadan on 8/1/13.
  */
-public interface UserDao {            //update and delete?
-    public void addUser(User user);
+public interface UserDao {
 
-    public User getUserByLogin(String login);
+    public void create(User user) throws IllegalArgumentException, DAOException;
+
+    public User findByLogin(String login);
 
     public User validateUser(String login, String password);
 }

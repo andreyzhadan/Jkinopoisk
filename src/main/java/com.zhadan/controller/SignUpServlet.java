@@ -35,11 +35,11 @@ public class SignUpServlet extends DependencyInjectionServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
         String password2 = req.getParameter("password2");
-        if (login != null && userDao.getUserByLogin(login) == null && !password.isEmpty() && password.equals(password2)) {
+        if (login != null && userDao.findByLogin(login) == null && !password.isEmpty() && password.equals(password2)) {
             User user = new User();
             user.setLogin(login);
             user.setPassword(password);
-            userDao.addUser(user);
+            userDao.create(user);
             req.getSession().setAttribute("login", user.getLogin());
             req.getSession().setAttribute("user", user);
             resp.sendRedirect(INDEX_PAGE);

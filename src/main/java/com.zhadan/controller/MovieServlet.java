@@ -34,7 +34,7 @@ public class MovieServlet extends DependencyInjectionServlet {
         String idStr = req.getParameter(PARAM_ID);
         if (idStr != null) {
             final Integer id = Integer.valueOf(idStr);
-            Movie movie = movieDao.findById(id);
+            Movie movie = movieDao.find(id);
             if (movie != null) {
                 req.setAttribute(ATTRIBUTE_MOVIE, movie);
                 logger.info("set attribute " + ATTRIBUTE_MOVIE + movie);

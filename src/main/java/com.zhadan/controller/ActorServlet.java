@@ -25,7 +25,7 @@ public class ActorServlet extends DependencyInjectionServlet {
     private static final String ATTRIBUTE_ACTOR = "actor";
     private static final String PAGE_OK = "/actor.jsp";
     private static final String PAGE_ERROR = "/error.jsp";
-    private static final Logger logger = getLogger(ActorServlet.class.getName());
+    private static final Logger logger = getLogger(ActorServlet.class.getSimpleName());
     @ZhadanInject("actorDao")
     private ActorDao actorDao;
 
@@ -34,7 +34,7 @@ public class ActorServlet extends DependencyInjectionServlet {
         String idStr = req.getParameter(PARAM_ID);
         if (idStr != null) {
             final Integer id = Integer.valueOf(idStr);
-            Actor actor = actorDao.findById(id);
+            Actor actor = actorDao.find(id);
             if (actor != null) {
                 req.setAttribute(ATTRIBUTE_ACTOR, actor);
                 logger.info("set attribute " + ATTRIBUTE_ACTOR + actor);

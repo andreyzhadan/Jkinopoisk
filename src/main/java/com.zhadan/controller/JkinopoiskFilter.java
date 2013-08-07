@@ -22,7 +22,6 @@ public class JkinopoiskFilter implements Filter {
         //NOP
     }
 
-    //Came to filter twice, first time 4-th
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest req = (HttpServletRequest) request;

@@ -14,7 +14,7 @@
     <%for (Movie movie : (List<Movie>) request.getAttribute("movies")) {%>
     <tr>
         <td>
-            <a href="/movie?id=<%=movie.getId()%>">
+            <a href="/movieEdit?id=<%=movie.getId()%>">
                 <%=movie.getId()%>
             </a>
         </td>

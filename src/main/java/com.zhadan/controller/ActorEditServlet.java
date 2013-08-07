@@ -1,7 +1,7 @@
 package com.zhadan.controller;
 
-import com.zhadan.bean.Movie;
-import com.zhadan.dao.MovieDao;
+import com.zhadan.bean.Actor;
+import com.zhadan.dao.ActorDao;
 import com.zhadan.ownIoC.DependencyInjectionServlet;
 import com.zhadan.ownIoC.ZhadanInject;
 import org.apache.log4j.Logger;
@@ -15,29 +15,29 @@ import static org.apache.log4j.Logger.getLogger;
 
 /**
  * Created with IntelliJ IDEA.
- * User: Andrew
- * Date: 01.08.13
- * Time: 22:48
+ * User: azhadan
+ * Date: 8/4/13
+ * Time: 1:11 PM
  */
-public class MovieServlet extends DependencyInjectionServlet {
-    private static final long serialVersionUID = -6777834847092077725L;
+public class ActorEditServlet extends DependencyInjectionServlet {
+    private static final long serialVersionUID = 2352072114543109917L;
     private static final String PARAM_ID = "id";
-    private static final String ATTRIBUTE_MOVIE = "movie";
-    private static final String PAGE_OK = "/movie.jsp";
+    private static final String ATTRIBUTE_ACTOR = "actor";
+    private static final String PAGE_OK = "/actorEdit.jsp";
     private static final String PAGE_ERROR = "/error.jsp";
-    private static final Logger logger = getLogger(MovieServlet.class.getName());
-    @ZhadanInject("movieDao")
-    private MovieDao movieDao;
+    private static final Logger logger = getLogger(ActorEditServlet.class.getSimpleName());
+    @ZhadanInject("actorDao")
+    private ActorDao actorDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idStr = req.getParameter(PARAM_ID);
         if (idStr != null) {
             final Integer id = Integer.valueOf(idStr);
-            Movie movie = movieDao.find(id);
-            if (movie != null) {
-                req.setAttribute(ATTRIBUTE_MOVIE, movie);
-                logger.info("set attribute " + ATTRIBUTE_MOVIE + movie);
+            Actor actor = actorDao.find(id);
+            if (actor != null) {
+                req.setAttribute(ATTRIBUTE_ACTOR, actor);
+                logger.info("set attribute " + ATTRIBUTE_ACTOR + actor);
                 req.getRequestDispatcher(PAGE_OK).forward(req, resp);
                 logger.info("redirected to page " + PAGE_OK);
                 return;

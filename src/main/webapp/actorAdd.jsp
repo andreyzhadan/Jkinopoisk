@@ -1,3 +1,4 @@
+<%@ taglib prefix="customTags" tagdir="/WEB-INF/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: azhadan
@@ -18,34 +19,8 @@
             <div id="legend">
                 <legend class="">Actor add page</legend>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="firstName">First Name</label>
+            <customTags:actorTag/>
 
-                <div class="controls">
-                    <input type="text" id="firstName" name="firstName" placeholder="" class="myInput">
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="lastName">Last Name</label>
-
-                <div class="controls">
-                    <input type="text" id="lastName" name="lastName" placeholder="" class="myInput">
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="birthday">Birthday</label>
-
-                <div class="controls">
-                    <input type="text" id="birthday" name="birthday" placeholder="" class="myInput">
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="country">Country</label>
-
-                <div class="controls">
-                    <input type="text" id="country" name="country" placeholder="" class="myInput">
-                </div>
-            </div>
             <div class="control-group">
                 <div class="controls">
                     <button class="btn btn-success">Add</button>

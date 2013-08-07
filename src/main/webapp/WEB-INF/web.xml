@@ -35,12 +35,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>movieController</servlet-name>
-        <servlet-class>com.zhadan.controller.MovieServlet</servlet-class>
+        <servlet-name>movieEditController</servlet-name>
+        <servlet-class>com.zhadan.controller.MovieEditServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>movieController</servlet-name>
-        <url-pattern>/movie</url-pattern>
+        <servlet-name>movieEditController</servlet-name>
+        <url-pattern>/movieEdit</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -52,7 +52,6 @@
         <url-pattern>/movieAdd</url-pattern>
     </servlet-mapping>
 
-
     <servlet>
         <servlet-name>actorsController</servlet-name>
         <servlet-class>com.zhadan.controller.ActorsServlet</servlet-class>
@@ -63,12 +62,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>actorController</servlet-name>
-        <servlet-class>com.zhadan.controller.ActorServlet</servlet-class>
+        <servlet-name>actorEditController</servlet-name>
+        <servlet-class>com.zhadan.controller.ActorEditServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>actorController</servlet-name>
-        <url-pattern>/actor</url-pattern>
+        <servlet-name>actorEditController</servlet-name>
+        <url-pattern>/actorEdit</url-pattern>
     </servlet-mapping>
 
     <servlet>

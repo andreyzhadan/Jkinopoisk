@@ -1,13 +1,11 @@
 package com.zhadan.controller;
 
 import com.zhadan.bean.Actor;
-import com.zhadan.bean.User;
 import com.zhadan.dao.ActorDao;
 import com.zhadan.ownIoC.DependencyInjectionServlet;
 import com.zhadan.ownIoC.ZhadanInject;
 import org.apache.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

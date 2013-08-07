@@ -17,6 +17,9 @@ Time: 23:23
     <div class="page-header" align="center">
         <h3>Movies page</h3>
     </div>
+
+    <a href="/movieAdd.jsp" class="btn btn-primary myButton">New movie</a>
+
     <customTags:moviesTag/>
 </div>
 </body>

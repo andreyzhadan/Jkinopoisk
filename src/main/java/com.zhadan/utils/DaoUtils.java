@@ -11,6 +11,9 @@ package com.zhadan.utils;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.*;
 
 import static org.apache.log4j.Logger.getLogger;
@@ -40,14 +43,14 @@ public final class DaoUtils {
     }
 
     /**
-     * Quietly close the Connection. Any errors will be printed to the logger.
+     * Quietly close the ResultSet. Any errors will be printed to the logger.
      *
-     * @param connection The Connection to be closed quietly.
+     * @param resultSet The ResultSet to be closed quietly.
      */
-    public static void close(Connection connection) {
-        if (connection != null) {
+    public static void close(ResultSet resultSet) {
+        if (resultSet != null) {
             try {
-                connection.close();
+                resultSet.close();
             } catch (SQLException e) {
                 logger.error("Closing Connection failed: " + e.getMessage());
             }
@@ -70,14 +73,14 @@ public final class DaoUtils {
     }
 
     /**
-     * Quietly close the ResultSet. Any errors will be printed to the logger.
+     * Quietly close the Connection. Any errors will be printed to the logger.
      *
-     * @param resultSet The ResultSet to be closed quietly.
+     * @param connection The Connection to be closed quietly.
      */
-    public static void close(ResultSet resultSet) {
-        if (resultSet != null) {
+    public static void close(Connection connection) {
+        if (connection != null) {
             try {
-                resultSet.close();
+                connection.close();
             } catch (SQLException e) {
                 logger.error("Closing Connection failed: " + e.getMessage());
             }
@@ -97,6 +100,30 @@ public final class DaoUtils {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void insertData(BasicDataSource basicDataSource, String script) {
+        try {
+            Connection connection = basicDataSource.getConnection();
+            Statement statement = connection.createStatement();
+            statement.execute(script);
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static DataSource createDataSource() {
+        DataSource dataSource = null;
+        try {
+            // Create initial context JNDI
+            // Get datasource from context
+            dataSource = (DataSource) (new InitialContext()).lookup("java:comp/env/jdbc/jkinopoisk");
+        } catch (NamingException e) {
+            logger.error("Naming exception " + e.getMessage());
+        }
+        return dataSource;
     }
 
 }

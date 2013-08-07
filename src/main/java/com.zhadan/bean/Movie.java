@@ -27,6 +27,15 @@ public class Movie {
     private String picture;
     private List<Actor> actors;
 
+    public Movie(String name, String russianName, float rating, String slogan, int year, String country) {
+        this.country = country;
+        this.name = name;
+        this.slogan = slogan;
+        this.rating = rating;
+        this.russianName = russianName;
+        this.year = year;
+    }
+
     public Movie() {
 
     }
@@ -37,14 +46,6 @@ public class Movie {
 
     public void setPicture(String picture) {
         this.picture = picture;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public List<Actor> getActors() {
@@ -61,14 +62,6 @@ public class Movie {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public float getRating() {
@@ -95,14 +88,6 @@ public class Movie {
         this.slogan = slogan;
     }
 
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -113,5 +98,29 @@ public class Movie {
         builder.append(" year = ");
         builder.append(this.getYear());
         return builder.toString();
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

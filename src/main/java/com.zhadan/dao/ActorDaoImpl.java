@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.zhadan.utils.DaoUtils.close;
+import static com.zhadan.utils.DaoUtils.createDataSource;
 import static org.apache.log4j.Logger.getLogger;
 
 /**
@@ -33,13 +34,7 @@ public class ActorDaoImpl implements ActorDao {
 
 
     public ActorDaoImpl() {
-        try {
-            // Create initial context JNDI
-            // Get datasource from context
-            dataSource = (DataSource) (new InitialContext()).lookup("java:comp/env/jdbc/jkinopoisk");
-        } catch (NamingException e) {
-            logger.error("Naming exception " + e.getMessage());
-        }
+        dataSource = createDataSource();
     }
 
     public void setDataSource(DataSource dataSource) {
@@ -138,7 +133,7 @@ public class ActorDaoImpl implements ActorDao {
             ps.setInt(5, entity.getId());
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0) {
-                throw new DAOException("Updating user failed, no rows affected.");
+                throw new DAOException("Updating actor failed, no rows affected.");
             }
         } catch (Exception e) {
             throw new DAOException(e);
@@ -159,7 +154,7 @@ public class ActorDaoImpl implements ActorDao {
             int affectedRows = ps.executeUpdate();
             logger.debug("You are trying to delete actor");
             if (affectedRows == 0) {
-                throw new DAOException("Updating user failed, no rows affected.");
+                throw new DAOException("Updating actor failed, no rows affected.");
             }
         } catch (Exception e) {
             throw new DAOException(e);

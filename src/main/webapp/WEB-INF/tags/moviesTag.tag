@@ -1,6 +1,6 @@
 <%@ tag import="com.zhadan.bean.Movie" %>
 <%@ tag import="java.util.List" %>
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover table-bordered">
     <thead>
     <td>Id</td>
     <td>Name</td>

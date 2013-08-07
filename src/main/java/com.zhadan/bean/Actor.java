@@ -24,6 +24,13 @@ public class Actor {
     public Actor() {
     }
 
+    public Actor(String firstName, String lastName, int birthday, String country) {
+        this.country = country;
+        this.birthday = birthday;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public String getPicture() {
         return picture;
     }
@@ -61,20 +68,12 @@ public class Actor {
         return builder.toString();
     }
 
-    public String getLastName() {
-        return lastName;
+    public int getId() {
+        return id;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getBirthday() {
@@ -85,11 +84,19 @@ public class Actor {
         this.birthday = birthday;
     }
 
-    public int getId() {
-        return id;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

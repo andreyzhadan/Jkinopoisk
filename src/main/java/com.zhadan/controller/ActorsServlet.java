@@ -25,7 +25,7 @@ public class ActorsServlet extends DependencyInjectionServlet {
     private static final String ATTRIBUTE_ACTOR_LIST = "actors";
     private static final String PAGE_OK = "/actors.jsp";
     private static final String PAGE_ERROR = "/error.jsp";
-    private static final Logger logger = getLogger(ActorsServlet.class);
+    private static final Logger logger = getLogger(ActorsServlet.class.getSimpleName());
     @ZhadanInject("actorDao")
     private ActorDao actorDao;
 

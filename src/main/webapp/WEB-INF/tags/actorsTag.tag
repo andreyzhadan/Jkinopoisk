@@ -6,12 +6,12 @@
   Date: 8/5/13
   Time: 5:37 PM
 --%>
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover table-bordered">
     <thead>
     <td>Id</td>
     <td>First name</td>
     <td>Last name</td>
-    <td>Date</td>
+    <td>Birthday</td>
     <td>Country</td>
     </thead>
     <tbody>

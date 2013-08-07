@@ -1,3 +1,7 @@
 .myInput {
     height: 30px !important;
 }
+
+.myButton {
+    margin-bottom: 10px;
+}

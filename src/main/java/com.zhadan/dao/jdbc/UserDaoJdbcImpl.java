@@ -1,28 +1,29 @@
-package com.zhadan.dao;
+package com.zhadan.dao.jdbc;
 
 import com.zhadan.bean.User;
+import com.zhadan.dao.interfaces.UserDao;
 import com.zhadan.exceptions.DAOException;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
-import static com.zhadan.utils.DaoUtils.close;
+import static com.zhadan.utils.DatabaseUtils.close;
 import static org.apache.log4j.Logger.getLogger;
 
 /**
  * Created by azhadan on 8/1/13.
  */
-public class UserDaoImpl implements UserDao {
-    private static final Logger logger = getLogger(UserDaoImpl.class.getSimpleName());
-    private static final String SELECT_SQL = "select * from user where login=?";
-    private static final String INSERT_SQL = "insert into user (login,password) values (?,?)";
+@Repository
+public class UserDaoJdbcImpl implements UserDao {
+    private static final Logger logger = getLogger(UserDaoJdbcImpl.class.getSimpleName());
+    private static final String SELECT_SQL = "select * from users where login=?";
+    private static final String INSERT_SQL = "insert into users (login,password) values (?,?)";
 
     @Override
     public void create(User user) throws IllegalArgumentException, DAOException {

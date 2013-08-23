@@ -1,9 +1,8 @@
 package com.zhadan.controller;
 
 import com.zhadan.bean.Actor;
-import com.zhadan.dao.ActorDao;
-import com.zhadan.ownIoC.DependencyInjectionServlet;
-import com.zhadan.ownIoC.ZhadanInject;
+import com.zhadan.dao.interfaces.ActorDao;
+import com.zhadan.ownIoC.SpringInitServlet;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -20,18 +19,19 @@ import static org.apache.log4j.Logger.getLogger;
  * Date: 8/4/13
  * Time: 1:12 PM
  */
-public class ActorsServlet extends DependencyInjectionServlet {
+public class ActorsServlet extends SpringInitServlet {
     private static final long serialVersionUID = -5043972288953941065L;
     private static final String ATTRIBUTE_ACTOR_LIST = "actors";
     private static final String PAGE_OK = "/actors.jsp";
     private static final String PAGE_ERROR = "/error.jsp";
     private static final Logger logger = getLogger(ActorsServlet.class.getSimpleName());
-    @ZhadanInject("actorDao")
+    //@ZhadanInject("actorDao")
     private ActorDao actorDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            actorDao = (ActorDao) getContext().getBean("actorDao");
             List<Actor> actorList = actorDao.list();
             req.setAttribute(ATTRIBUTE_ACTOR_LIST, actorList);
             logger.info("set attribute " + ATTRIBUTE_ACTOR_LIST + " with " + actorList.size() + " movies");

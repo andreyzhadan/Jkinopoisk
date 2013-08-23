@@ -1,9 +1,8 @@
 package com.zhadan.controller;
 
 import com.zhadan.bean.Actor;
-import com.zhadan.dao.ActorDao;
-import com.zhadan.ownIoC.DependencyInjectionServlet;
-import com.zhadan.ownIoC.ZhadanInject;
+import com.zhadan.dao.interfaces.ActorDao;
+import com.zhadan.ownIoC.SpringInitServlet;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -19,11 +18,11 @@ import static org.apache.log4j.Logger.getLogger;
  * Date: 8/7/13
  * Time: 12:25 PM
  */
-public class ActorAddServlet extends DependencyInjectionServlet {
+public class ActorAddServlet extends SpringInitServlet {
     private static final long serialVersionUID = 2137603839569251586L;
     private static final Logger logger = getLogger(ActorAddServlet.class.getSimpleName());
     private static final String ACTOR_ADD_PAGE = "/actorAdd.jsp";
-    @ZhadanInject("actorDao")
+    //@ZhadanInject("actorDao")
     private ActorDao actorDao;
 
     @Override
@@ -34,6 +33,7 @@ public class ActorAddServlet extends DependencyInjectionServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            actorDao = (ActorDao) getContext().getBean("actorDao");
             String firstName = req.getParameter("firstName");
             String lastName = req.getParameter("lastName");
             Integer birthday = Integer.valueOf(req.getParameter("birthday"));

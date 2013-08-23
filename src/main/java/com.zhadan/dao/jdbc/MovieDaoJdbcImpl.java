@@ -1,6 +1,7 @@
-package com.zhadan.dao;
+package com.zhadan.dao.jdbc;
 
 import com.zhadan.bean.Movie;
+import com.zhadan.dao.interfaces.MovieDao;
 import com.zhadan.exceptions.DAOException;
 import org.apache.log4j.Logger;
 
@@ -13,8 +14,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.zhadan.utils.DaoUtils.close;
-import static com.zhadan.utils.DaoUtils.createDataSource;
+import static com.zhadan.utils.DatabaseUtils.close;
+import static com.zhadan.utils.DatabaseUtils.createDataSource;
 import static org.apache.log4j.Logger.getLogger;
 
 /**
@@ -23,8 +24,8 @@ import static org.apache.log4j.Logger.getLogger;
  * Date: 01.08.13
  * Time: 22:34
  */
-public class MovieDaoImpl implements MovieDao {
-    private static final Logger logger = getLogger(MovieDaoImpl.class.getName());
+public class MovieDaoJdbcImpl implements MovieDao {
+    private static final Logger logger = getLogger(MovieDaoJdbcImpl.class.getName());
     private static final String SELECT_ALL = "select * from movie";
     private static final String SELECT_BY_ID = "select * from movie where id=?";
     private static final String INSERT = "insert into movie (name,russianName,rating,slogan,year,country) values (?,?,?,?,?,?)";
@@ -33,7 +34,7 @@ public class MovieDaoImpl implements MovieDao {
     private DataSource dataSource;
 
 
-    public MovieDaoImpl() {
+    public MovieDaoJdbcImpl() {
         dataSource = createDataSource();
     }
 

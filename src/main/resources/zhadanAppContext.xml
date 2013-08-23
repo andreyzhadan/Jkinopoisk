@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <context>
-    <bean name="actorDao" class="com.zhadan.dao.ActorDaoImpl"/>
-    <bean name="movieDao" class="com.zhadan.dao.MovieDaoImpl"/>
-    <bean name="userDao" class="com.zhadan.dao.UserDaoImpl"/>
+    <bean name="actorDao" class="com.zhadan.dao.jdbc.ActorDaoJdbcImpl"/>
+    <bean name="movieDao" class="com.zhadan.dao.jdbc.MovieDaoJdbcImpl"/>
+    <bean name="userDao" class="com.zhadan.dao.jdbc.UserDaoJdbcImpl"/>
 </context>

@@ -1,4 +1,4 @@
-package com.zhadan.dao;
+package com.zhadan.dao.interfaces;
 
 import com.zhadan.bean.Actor;
 

@@ -1,8 +1,8 @@
 package com.zhadan.ownIoC;
 
-import com.zhadan.dao.ActorDaoImpl;
-import com.zhadan.dao.MovieDaoImpl;
-import com.zhadan.dao.UserDaoImpl;
+import com.zhadan.dao.jdbc.ActorDaoJdbcImpl;
+import com.zhadan.dao.jdbc.MovieDaoJdbcImpl;
+import com.zhadan.dao.jdbc.UserDaoJdbcImpl;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,13 +29,13 @@ public class AppContextSimple implements AppContext {
     @Override
     public <T> T getBean(String beanName, Class<T> clazz) {
         if ("actorDao".equals(beanName)) {
-            return (T) new ActorDaoImpl();
+            return (T) new ActorDaoJdbcImpl();
         }
         if ("movieDao".equals(beanName)) {
-            return (T) new MovieDaoImpl();
+            return (T) new MovieDaoJdbcImpl();
         }
         if ("userDao".equals(beanName)) {
-            return (T) new UserDaoImpl();
+            return (T) new UserDaoJdbcImpl();
         }
         throw new IllegalArgumentException("No entity for name " + beanName);
     }

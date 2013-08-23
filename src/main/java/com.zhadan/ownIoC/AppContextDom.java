@@ -54,8 +54,9 @@ public class AppContextDom implements AppContext {
                     Element element = (Element) node;
                     String beanName = element.getAttribute("name");
                     String beanClass = element.getAttribute("class");
-                    if (beanName.equals(name))
+                    if (beanName.equals(name)) {
                         return (T) newInstance(beanClass);
+                    }
                 }
             }
         } catch (Exception e) {

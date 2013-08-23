@@ -23,10 +23,10 @@ import static org.apache.log4j.Logger.getLogger;
  * single static methods. As far it contains a PreparedStatement values setter and several quiet
  * close methods.
  */
-public final class DaoUtils {
-    private static final Logger logger = getLogger(DaoUtils.class.getSimpleName());
+public final class DatabaseUtils {
+    private static final Logger logger = getLogger(DatabaseUtils.class.getSimpleName());
 
-    public DaoUtils() {
+    public DatabaseUtils() {
     }
 
     /**

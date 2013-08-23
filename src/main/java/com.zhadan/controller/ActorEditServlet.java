@@ -1,9 +1,8 @@
 package com.zhadan.controller;
 
 import com.zhadan.bean.Actor;
-import com.zhadan.dao.ActorDao;
-import com.zhadan.ownIoC.DependencyInjectionServlet;
-import com.zhadan.ownIoC.ZhadanInject;
+import com.zhadan.dao.interfaces.ActorDao;
+import com.zhadan.ownIoC.SpringInitServlet;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -19,18 +18,19 @@ import static org.apache.log4j.Logger.getLogger;
  * Date: 8/4/13
  * Time: 1:11 PM
  */
-public class ActorEditServlet extends DependencyInjectionServlet {
+public class ActorEditServlet extends SpringInitServlet {
     private static final long serialVersionUID = 2352072114543109917L;
     private static final String PARAM_ID = "id";
     private static final String ATTRIBUTE_ACTOR = "actor";
     private static final String PAGE_OK = "/actorEdit.jsp";
     private static final String PAGE_ERROR = "/error.jsp";
     private static final Logger logger = getLogger(ActorEditServlet.class.getSimpleName());
-    @ZhadanInject("actorDao")
+    //@ZhadanInject("actorDao")
     private ActorDao actorDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        actorDao = (ActorDao) getContext().getBean("actorDao");
         String idStr = req.getParameter(PARAM_ID);
         if (idStr != null) {
             final Integer id = Integer.valueOf(idStr);

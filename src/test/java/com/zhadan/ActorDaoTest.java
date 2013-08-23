@@ -1,7 +1,7 @@
 package com.zhadan;
 
 import com.zhadan.bean.Actor;
-import com.zhadan.dao.ActorDaoImpl;
+import com.zhadan.dao.jdbc.ActorDaoJdbcImpl;
 import com.zhadan.exceptions.DAOException;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
@@ -11,8 +11,8 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.zhadan.utils.DaoUtils.insertData;
-import static com.zhadan.utils.DaoUtils.recreateTable;
+import static com.zhadan.utils.DatabaseUtils.insertData;
+import static com.zhadan.utils.DatabaseUtils.recreateTable;
 import static org.apache.log4j.Logger.getLogger;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,13 +30,13 @@ public class ActorDaoTest {
 
     private static final String url = "jdbc:h2:jkinopoisk";
     private static final Logger logger = getLogger(ActorDaoTest.class.getSimpleName());
-    private static ActorDaoImpl actorDao;
+    private static ActorDaoJdbcImpl actorDao;
     private static BasicDataSource dataSource;
 
     @BeforeClass
     public static void beforeSetUp() {
         logger.debug("Before setUp method in actorDaoTest");
-        actorDao = new ActorDaoImpl();
+        actorDao = new ActorDaoJdbcImpl();
         dataSource = new BasicDataSource();
         dataSource.setUrl(url);
         actorDao.setDataSource(dataSource);

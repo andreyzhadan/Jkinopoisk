@@ -1,11 +1,8 @@
 package com.zhadan.controller;
 
-import com.zhadan.bean.Actor;
 import com.zhadan.bean.Movie;
-import com.zhadan.dao.ActorDao;
-import com.zhadan.dao.MovieDao;
-import com.zhadan.ownIoC.DependencyInjectionServlet;
-import com.zhadan.ownIoC.ZhadanInject;
+import com.zhadan.dao.interfaces.MovieDao;
+import com.zhadan.ownIoC.SpringInitServlet;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -21,11 +18,11 @@ import static org.apache.log4j.Logger.getLogger;
  * Date: 8/7/13
  * Time: 12:46 PM
  */
-public class MovieAddServlet extends DependencyInjectionServlet {
+public class MovieAddServlet extends SpringInitServlet {
     private static final long serialVersionUID = 4787141816316166489L;
     private static final Logger logger = getLogger(MovieAddServlet.class.getSimpleName());
     private static final String MOVIE_ADD_PAGE = "/movieAdd.jsp";
-    @ZhadanInject("movieDao")
+    //@ZhadanInject("movieDao")
     private MovieDao movieDao;
 
     @Override
@@ -36,6 +33,7 @@ public class MovieAddServlet extends DependencyInjectionServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+            movieDao = (MovieDao) getContext().getBean("movieDao");
             String name = req.getParameter("name");
             String russianName = req.getParameter("russianName");
             Float rating = Float.valueOf(req.getParameter("rating"));

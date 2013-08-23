@@ -1,9 +1,8 @@
 package com.zhadan.controller;
 
 import com.zhadan.bean.Movie;
-import com.zhadan.dao.MovieDao;
-import com.zhadan.ownIoC.DependencyInjectionServlet;
-import com.zhadan.ownIoC.ZhadanInject;
+import com.zhadan.dao.interfaces.MovieDao;
+import com.zhadan.ownIoC.SpringInitServlet;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -19,18 +18,19 @@ import static org.apache.log4j.Logger.getLogger;
  * Date: 01.08.13
  * Time: 22:48
  */
-public class MovieEditServlet extends DependencyInjectionServlet {
+public class MovieEditServlet extends SpringInitServlet {
     private static final long serialVersionUID = -6777834847092077725L;
     private static final String PARAM_ID = "id";
     private static final String ATTRIBUTE_MOVIE = "movie";
     private static final String PAGE_OK = "/movieEdit.jsp";
     private static final String PAGE_ERROR = "/error.jsp";
     private static final Logger logger = getLogger(MovieEditServlet.class.getName());
-    @ZhadanInject("movieDao")
+    //@ZhadanInject("movieDao")
     private MovieDao movieDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        movieDao = (MovieDao) getContext().getBean("movieDao");
         String idStr = req.getParameter(PARAM_ID);
         if (idStr != null) {
             final Integer id = Integer.valueOf(idStr);

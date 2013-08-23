@@ -1,9 +1,8 @@
 package com.zhadan.controller;
 
 import com.zhadan.bean.User;
-import com.zhadan.dao.UserDao;
-import com.zhadan.dao.UserDaoImpl;
-import com.zhadan.ownIoC.DependencyInjectionServlet;
+import com.zhadan.dao.interfaces.UserDao;
+import com.zhadan.ownIoC.SpringInitServlet;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -17,12 +16,19 @@ import java.io.IOException;
  * Date: 8/2/13
  * Time: 4:53 PM
  */
-public class SignUpServlet extends DependencyInjectionServlet {
+public class SignUpServlet extends SpringInitServlet {
     private static final long serialVersionUID = 348015408215577254L;
     private static final String INDEX_PAGE = "/home.jsp";
     private static final String REG_PAGE = "/signUp.jsp";
     private static final Logger logger = Logger.getLogger(SignUpServlet.class.getName());
-    private final UserDao userDao = new UserDaoImpl();
+    //@ZhadanInject("userDao")
+    //@Autowired
+    private UserDao userDao;
+
+//    @Autowired
+//    public void setUserDao(UserDao userDao) {
+//        this.userDao = userDao;
+//    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,6 +37,7 @@ public class SignUpServlet extends DependencyInjectionServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        userDao = (UserDao) getContext().getBean("userDao");
         logger.info("POST in register");
         String login = req.getParameter("login");
         String password = req.getParameter("password");

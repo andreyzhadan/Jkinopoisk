@@ -14,7 +14,8 @@ import java.util.List;
  * Time: 22:35
  */
 @Entity
-public class Movie {
+public class Movie implements Serializable {
+    private static final long serialVersionUID = 6010503502743285804L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

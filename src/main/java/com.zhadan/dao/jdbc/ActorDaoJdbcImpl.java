@@ -1,20 +1,18 @@
-package com.zhadan.dao;
+package com.zhadan.dao.jdbc;
 
 import com.zhadan.bean.Actor;
+import com.zhadan.dao.interfaces.ActorDao;
 import com.zhadan.exceptions.DAOException;
 import org.apache.log4j.Logger;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.zhadan.utils.DaoUtils.close;
-import static com.zhadan.utils.DaoUtils.createDataSource;
+import static com.zhadan.utils.DatabaseUtils.close;
+import static com.zhadan.utils.DatabaseUtils.createDataSource;
 import static org.apache.log4j.Logger.getLogger;
 
 /**
@@ -23,8 +21,8 @@ import static org.apache.log4j.Logger.getLogger;
  * Date: 8/4/13
  * Time: 1:17 PM
  */
-public class ActorDaoImpl implements ActorDao {
-    private static final Logger logger = getLogger(ActorDaoImpl.class.getSimpleName());
+public class ActorDaoJdbcImpl implements ActorDao {
+    private static final Logger logger = getLogger(ActorDaoJdbcImpl.class.getSimpleName());
     private static final String SELECT_ALL = "select * from actor";
     private static final String SELECT_BY_ID = "select * from actor where id=?";
     private static final String INSERT = "insert into actor (firstName,lastName,birthday,country) values (?,?,?,?)";
@@ -33,7 +31,7 @@ public class ActorDaoImpl implements ActorDao {
     private DataSource dataSource;
 
 
-    public ActorDaoImpl() {
+    public ActorDaoJdbcImpl() {
         dataSource = createDataSource();
     }
 

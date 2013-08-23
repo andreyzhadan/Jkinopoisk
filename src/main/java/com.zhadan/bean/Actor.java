@@ -1,6 +1,10 @@
 package com.zhadan.bean;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +14,8 @@ import java.util.List;
  * Time: 22:38
  */
 @Entity
-public class Actor {
+public class Actor implements Serializable {
+    private static final long serialVersionUID = 114900396648141282L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

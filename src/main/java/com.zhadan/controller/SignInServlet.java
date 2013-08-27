@@ -4,6 +4,7 @@ import com.zhadan.bean.User;
 import com.zhadan.dao.interfaces.UserDao;
 import com.zhadan.ownIoC.SpringInitServlet;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.RequestDispatcher;
@@ -15,7 +16,7 @@ import java.io.IOException;
 /**
  * Created by azhadan on 7/30/13.
  */
-@Service
+//@Service
 public class SignInServlet extends SpringInitServlet {
     private static final long serialVersionUID = -6500557339421743748L;
     private static final String INDEX_PAGE = "/home.jsp";
@@ -25,10 +26,10 @@ public class SignInServlet extends SpringInitServlet {
     //@Autowired
     private UserDao userDao;
 
-//    @Autowired
-//    public void setUserDao(UserDao userDao) {
-//        this.userDao = userDao;
-//    }
+    @Required
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,7 +38,7 @@ public class SignInServlet extends SpringInitServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        userDao = (UserDao) getContext().getBean("userDao");
+        //userDao = (UserDao) getContext().getBean("userDao");
         logger.info("Session id " + req.getSession().getId());
         RequestDispatcher rd;
         String login = req.getParameter("login");

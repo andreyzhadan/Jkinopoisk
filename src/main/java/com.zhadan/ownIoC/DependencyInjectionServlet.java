@@ -27,7 +27,7 @@ public class DependencyInjectionServlet extends HttpServlet {
     public void init() throws ServletException {
         //get init context params
         String appCtxPath = getInitContextParam(APP_CTX_PATH); //zhadanApplicationContext
-        String appCtxClass = getInitContextParam(APP_CTX_CLASS); //AppContextSimple
+        String appCtxClass = getInitContextParam(APP_CTX_CLASS);  //AppContextSimple
 
         try {
             AppContext appCtx = initApplicationContext(appCtxPath, appCtxClass);

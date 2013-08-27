@@ -4,6 +4,7 @@ import com.zhadan.bean.User;
 import com.zhadan.dao.interfaces.UserDao;
 import com.zhadan.exceptions.DAOException;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.naming.Context;
@@ -19,7 +20,7 @@ import static org.apache.log4j.Logger.getLogger;
 /**
  * Created by azhadan on 8/1/13.
  */
-@Repository
+@Component
 public class UserDaoJdbcImpl implements UserDao {
     private static final Logger logger = getLogger(UserDaoJdbcImpl.class.getSimpleName());
     private static final String SELECT_SQL = "select * from users where login=?";

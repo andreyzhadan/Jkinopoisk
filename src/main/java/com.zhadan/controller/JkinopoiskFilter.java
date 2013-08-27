@@ -1,15 +1,12 @@
 package com.zhadan.controller;
 
 import com.zhadan.bean.User;
-import org.apache.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-
-import static org.apache.log4j.Logger.getLogger;
 
 /**
  * Created by azhadan on 7/31/13.

@@ -4,9 +4,13 @@ import com.zhadan.bean.Actor;
 import com.zhadan.dao.interfaces.ActorDao;
 import com.zhadan.exceptions.DAOException;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +25,7 @@ import static org.apache.log4j.Logger.getLogger;
  * Date: 8/4/13
  * Time: 1:17 PM
  */
+@Component
 public class ActorDaoJdbcImpl implements ActorDao {
     private static final Logger logger = getLogger(ActorDaoJdbcImpl.class.getSimpleName());
     private static final String SELECT_ALL = "select * from actor";

@@ -4,6 +4,7 @@ import com.zhadan.bean.Movie;
 import com.zhadan.dao.interfaces.MovieDao;
 import com.zhadan.exceptions.DAOException;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -24,6 +25,7 @@ import static org.apache.log4j.Logger.getLogger;
  * Date: 01.08.13
  * Time: 22:34
  */
+@Component
 public class MovieDaoJdbcImpl implements MovieDao {
     private static final Logger logger = getLogger(MovieDaoJdbcImpl.class.getName());
     private static final String SELECT_ALL = "select * from movie";

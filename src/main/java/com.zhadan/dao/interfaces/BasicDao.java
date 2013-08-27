@@ -1,5 +1,6 @@
 package com.zhadan.dao.interfaces;
 
+
 import com.zhadan.exceptions.DAOException;
 
 import java.util.List;

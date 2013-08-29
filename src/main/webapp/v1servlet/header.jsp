@@ -14,18 +14,18 @@
         <% if (request.getSession().getAttribute("login") != null) {%>
         <ul class="nav">
             <li>
-                <a href="/home.jsp">
+                <a href="/v1servlet/home.jsp">
                     <i class="icon-home"></i>
                     Home
                 </a>
             </li>
             <li>
-                <a href="/movies">
+                <a href="/v1servlet/movies">
                     Movies
                 </a>
             </li>
             <li>
-                <a href="/actors">
+                <a href="/v1servlet/actors">
                     Actors
                 </a>
             </li>
@@ -37,18 +37,18 @@
                 </a>
             </li>
             <li>
-                <a href="/signOut"><i class="icon-off"></i> Sign Out</a>
+                <a href="/v1servlet/signOut"><i class="icon-off"></i> Sign Out</a>
             </li>
         </ul>
         <%} else {%>
         <ul class="nav nav-pills pull-right">
             <li>
-                <a href="/signIn.jsp">
+                <a href="/v1servlet/signIn.jsp">
                     SignIn
                 </a>
             </li>
             <li>
-                <a href="/signUp.jsp">
+                <a href="/v1servlet/signUp.jsp">
                     SignUp
                 </a>
             </li>

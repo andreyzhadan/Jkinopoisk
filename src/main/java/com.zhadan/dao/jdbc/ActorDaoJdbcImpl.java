@@ -5,6 +5,7 @@ import com.zhadan.dao.interfaces.ActorDao;
 import com.zhadan.exceptions.DAOException;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -16,7 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.zhadan.utils.DatabaseUtils.close;
-import static com.zhadan.utils.DatabaseUtils.createDataSource;
 import static org.apache.log4j.Logger.getLogger;
 
 /**
@@ -25,23 +25,13 @@ import static org.apache.log4j.Logger.getLogger;
  * Date: 8/4/13
  * Time: 1:17 PM
  */
-@Component
+@Repository
 public class ActorDaoJdbcImpl implements ActorDao {
     private static final Logger logger = getLogger(ActorDaoJdbcImpl.class.getSimpleName());
-    private static final String SELECT_ALL = "select * from actor";
-    private static final String SELECT_BY_ID = "select * from actor where id=?";
-    private static final String INSERT = "insert into actor (firstName,lastName,birthday,country) values (?,?,?,?)";
-    private static final String UPDATE = "update actor set firstName=?,lastName=?,birthday=?,country=? where id=?";
-    private static final String DELETE = "delete from actor where id=?";
     private DataSource dataSource;
 
-
     public ActorDaoJdbcImpl() {
-        dataSource = createDataSource();
-    }
-
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+        //dataSource = createDataSource();
     }
 
     @Override
@@ -107,7 +97,7 @@ public class ActorDaoJdbcImpl implements ActorDao {
         ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
-            ps = connection.prepareStatement(INSERT);
+            ps = connection.prepareStatement(INSERT_SQL);
             ps.setString(1, entity.getFirstName());
             ps.setString(2, entity.getLastName());
             ps.setInt(3, entity.getBirthday());
@@ -128,7 +118,7 @@ public class ActorDaoJdbcImpl implements ActorDao {
         ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
-            ps = connection.prepareStatement(UPDATE);
+            ps = connection.prepareStatement(UPDATE_SQL);
             ps.setString(1, entity.getFirstName());
             ps.setString(2, entity.getLastName());
             ps.setInt(3, entity.getBirthday());
@@ -152,7 +142,7 @@ public class ActorDaoJdbcImpl implements ActorDao {
         ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
-            ps = connection.prepareStatement(DELETE);
+            ps = connection.prepareStatement(DELETE_SQL);
             ps.setInt(1, entity.getId());
             int affectedRows = ps.executeUpdate();
             logger.debug("You are trying to delete actor");
@@ -164,6 +154,11 @@ public class ActorDaoJdbcImpl implements ActorDao {
         } finally {
             close(connection, ps, rs);
         }
+    }
+
+    @Override
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
 }

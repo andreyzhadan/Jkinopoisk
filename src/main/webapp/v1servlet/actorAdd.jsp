@@ -13,8 +13,8 @@
 </head>
 <body>
 <div class="container">
-    <%@include file="/header.jsp" %>
-    <form class="form-horizontal well well-large" action="/actorAdd" method="post">
+    <%@include file="header.jsp" %>
+    <form class="form-horizontal well well-large" action="/v1servlet/actorAdd" method="post">
         <fieldset>
             <div id="legend">
                 <legend class="">Actor add page</legend>

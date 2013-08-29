@@ -1,4 +1,4 @@
-package com.zhadan.controller;
+package com.zhadan.servlet;
 
 import com.zhadan.bean.User;
 
@@ -12,7 +12,7 @@ import java.io.IOException;
  * Created by azhadan on 7/31/13.
  */
 public class JkinopoiskFilter implements Filter {
-    private static final String SIGNIN_PAGE = "/signIn.jsp";
+    private static final String SIGNIN_PAGE = "/v1servlet/signIn.jsp";
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -23,7 +23,7 @@ public class JkinopoiskFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest req = (HttpServletRequest) request;
         String reqURI = req.getRequestURI();
-        if (!reqURI.contains("/signIn") && !reqURI.contains("/signUp") &&
+        if (!reqURI.contains("/v1servlet/signIn") && !reqURI.contains("/v1servlet/signUp") &&
                 !reqURI.contains(".css") && !reqURI.contains("favicon.ico")) {             //create separate filter for static resources?
             HttpSession httpSession = req.getSession();
             User userFromSession = (User) httpSession.getAttribute("user");

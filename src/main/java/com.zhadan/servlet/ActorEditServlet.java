@@ -1,8 +1,7 @@
-package com.zhadan.controller;
+package com.zhadan.servlet;
 
 import com.zhadan.bean.Actor;
 import com.zhadan.dao.interfaces.ActorDao;
-import com.zhadan.ownIoC.SpringInitServlet;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -22,15 +21,19 @@ public class ActorEditServlet extends SpringInitServlet {
     private static final long serialVersionUID = 2352072114543109917L;
     private static final String PARAM_ID = "id";
     private static final String ATTRIBUTE_ACTOR = "actor";
-    private static final String PAGE_OK = "/actorEdit.jsp";
-    private static final String PAGE_ERROR = "/error.jsp";
+    private static final String PAGE_OK = "/v1servlet/actorEdit.jsp";
     private static final Logger logger = getLogger(ActorEditServlet.class.getSimpleName());
     //@ZhadanInject("actorDao")
     private ActorDao actorDao;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void init() throws ServletException {
+        super.init();
         actorDao = (ActorDao) getContext().getBean("actorDao");
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idStr = req.getParameter(PARAM_ID);
         if (idStr != null) {
             final Integer id = Integer.valueOf(idStr);
@@ -44,7 +47,6 @@ public class ActorEditServlet extends SpringInitServlet {
             }
         }
         //ERROR
-        resp.sendRedirect(PAGE_ERROR);
-        logger.info("redirect to page " + PAGE_ERROR);
+        logger.error("error occur ");
     }
 }

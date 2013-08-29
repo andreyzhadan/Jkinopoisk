@@ -15,16 +15,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import static com.zhadan.utils.DatabaseUtils.close;
+import static com.zhadan.utils.DatabaseUtils.createDataSource;
 import static org.apache.log4j.Logger.getLogger;
 
 /**
  * Created by azhadan on 8/1/13.
  */
-@Component
+@Repository
 public class UserDaoJdbcImpl implements UserDao {
     private static final Logger logger = getLogger(UserDaoJdbcImpl.class.getSimpleName());
-    private static final String SELECT_SQL = "select * from users where login=?";
-    private static final String INSERT_SQL = "insert into users (login,password) values (?,?)";
+    private DataSource dataSource;
+
+    public UserDaoJdbcImpl() {
+        //dataSource = createDataSource();
+    }
 
     @Override
     public void create(User user) throws IllegalArgumentException, DAOException {
@@ -32,9 +36,7 @@ public class UserDaoJdbcImpl implements UserDao {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            Context ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jkinopoisk");
-            connection = ds.getConnection();
+            connection = dataSource.getConnection();
             ps = connection.prepareStatement(INSERT_SQL);
             ps.setString(1, user.getLogin());
             ps.setString(2, user.getPassword());
@@ -53,13 +55,7 @@ public class UserDaoJdbcImpl implements UserDao {
         ResultSet rs = null;
         User user = null;
         try {
-            //Class.forName("com.mysql.jdbc.Driver");
-            //connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jkinopoisk", "root", "sadmin");
-
-            Context ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/jkinopoisk");
-            connection = ds.getConnection();
-
+            connection = dataSource.getConnection();
             ps = connection.prepareStatement(SELECT_SQL);
             ps.setString(1, login);
             rs = ps.executeQuery();
@@ -87,5 +83,10 @@ public class UserDaoJdbcImpl implements UserDao {
             return null;
         }
         return user;
+    }
+
+    @Override
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 }

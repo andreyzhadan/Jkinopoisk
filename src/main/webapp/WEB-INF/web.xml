@@ -2,131 +2,130 @@
         "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 <web-app>
-    <welcome-file-list>
-        <welcome-file>/jkinopoisk/home.jsp</welcome-file>
-    </welcome-file-list>
 
-    <context-param>
-        <param-name>appCtxPath</param-name>
-        <param-value>/zhadanAppContext.xml</param-value>
-    </context-param>
+    <!--Own IoC-->
+    <!--<context-param>-->
+    <!--<param-name>appCtxPath</param-name>-->
+    <!--<param-value>/zhadanAppContext.xml</param-value>-->
+    <!--</context-param>-->
 
-    <context-param>
-        <param-name>appCtxClass</param-name>
-        <param-value>com.zhadan.ownIoC.AppContextDom</param-value>
-    </context-param>
+    <!--<context-param>-->
+    <!--<param-name>appCtxClass</param-name>-->
+    <!--<param-value>com.zhadan.ownIoC.AppContextDom</param-value>-->
+    <!--</context-param>-->
 
-    <filter>
-        <filter-name>jKinopoiskFilter</filter-name>
-        <filter-class>com.zhadan.controller.JkinopoiskFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>jKinopoiskFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <!-- Enables Spring Security -->
-
+    <!--v1servlet-->
+    <!--<welcome-file-list>-->
+    <!--<welcome-file>/v1servlet/home.jsp</welcome-file>-->
+    <!--</welcome-file-list>-->
     <!--<filter>-->
-    <!--<filter-name>springSecurityFilterChain</filter-name>-->
-    <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+    <!--<filter-name>jKinopoiskFilter</filter-name>-->
+    <!--<filter-class>com.zhadan.servlet.JkinopoiskFilter</filter-class>-->
     <!--</filter>-->
     <!--<filter-mapping>-->
-    <!--<filter-name>springSecurityFilterChain</filter-name>-->
+    <!--<filter-name>jKinopoiskFilter</filter-name>-->
     <!--<url-pattern>/*</url-pattern>-->
     <!--</filter-mapping>-->
 
-    <!--<listener>-->
-    <!--<listener-class>-->
-    <!--org.springframework.web.context.ContextLoaderListener-->
-    <!--</listener-class>-->
-    <!--</listener>-->
+    <!--<servlet>-->
+    <!--<servlet-name>moviesController</servlet-name>-->
+    <!--<servlet-class>com.zhadan.servlet.MoviesServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>moviesController</servlet-name>-->
+    <!--<url-pattern>/v1servlet/movies</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+    <!--<servlet-name>movieEditController</servlet-name>-->
+    <!--<servlet-class>com.zhadan.servlet.MovieEditServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>movieEditController</servlet-name>-->
+    <!--<url-pattern>/v1servlet/movieEdit</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+    <!--<servlet-name>movieAddController</servlet-name>-->
+    <!--<servlet-class>com.zhadan.servlet.MovieAddServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>movieAddController</servlet-name>-->
+    <!--<url-pattern>/v1servlet/movieAdd</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+    <!--<servlet-name>actorsController</servlet-name>-->
+    <!--<servlet-class>com.zhadan.servlet.ActorsServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>actorsController</servlet-name>-->
+    <!--<url-pattern>/v1servlet/actors</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+    <!--<servlet-name>actorEditController</servlet-name>-->
+    <!--<servlet-class>com.zhadan.servlet.ActorEditServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>actorEditController</servlet-name>-->
+    <!--<url-pattern>/v1servlet/actorEdit</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+    <!--<servlet-name>actorAddController</servlet-name>-->
+    <!--<servlet-class>com.zhadan.servlet.ActorAddServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>actorAddController</servlet-name>-->
+    <!--<url-pattern>/v1servlet/actorAdd</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+    <!--<servlet-name>signInServlet</servlet-name>-->
+    <!--<servlet-class>com.zhadan.servlet.SignInServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>signInServlet</servlet-name>-->
+    <!--<url-pattern>/v1servlet/signIn</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+    <!--<servlet-name>signUpServlet</servlet-name>-->
+    <!--<servlet-class>com.zhadan.servlet.SignUpServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>signUpServlet</servlet-name>-->
+    <!--<url-pattern>/v1servlet/signUp</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+    <!--<servlet-name>signOutServlet</servlet-name>-->
+    <!--<servlet-class>com.zhadan.servlet.SignOutServlet</servlet-class>-->
+    <!--</servlet>-->
+    <!--<servlet-mapping>-->
+    <!--<servlet-name>signOutServlet</servlet-name>-->
+    <!--<url-pattern>/v1servlet/signOut</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--v2springMVC-->
+    <servlet>
+        <servlet-name>spring</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>spring</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!--Loading other spring config files-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
     <!--<context-param>-->
     <!--<param-name>contextConfigLocation</param-name>-->
-    <!--<param-value>-->
-    <!--/WEB-INF/spring-security.xml-->
-    <!--</param-value>-->
+    <!--<param-value>/WEB-INF/spring-security.xml</param-value>-->
     <!--</context-param>-->
-
-    <servlet>
-        <servlet-name>moviesController</servlet-name>
-        <servlet-class>com.zhadan.controller.MoviesServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>moviesController</servlet-name>
-        <url-pattern>/movies</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>movieEditController</servlet-name>
-        <servlet-class>com.zhadan.controller.MovieEditServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>movieEditController</servlet-name>
-        <url-pattern>/movieEdit</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>movieAddController</servlet-name>
-        <servlet-class>com.zhadan.controller.MovieAddServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>movieAddController</servlet-name>
-        <url-pattern>/movieAdd</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>actorsController</servlet-name>
-        <servlet-class>com.zhadan.controller.ActorsServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>actorsController</servlet-name>
-        <url-pattern>/actors</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>actorEditController</servlet-name>
-        <servlet-class>com.zhadan.controller.ActorEditServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>actorEditController</servlet-name>
-        <url-pattern>/actorEdit</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>actorAddController</servlet-name>
-        <servlet-class>com.zhadan.controller.ActorAddServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>actorAddController</servlet-name>
-        <url-pattern>/actorAdd</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>signInServlet</servlet-name>
-        <servlet-class>com.zhadan.controller.SignInServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>signInServlet</servlet-name>
-        <url-pattern>/signIn</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>signUpServlet</servlet-name>
-        <servlet-class>com.zhadan.controller.SignUpServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>signUpServlet</servlet-name>
-        <url-pattern>/signUp</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>signOutServlet</servlet-name>
-        <servlet-class>com.zhadan.controller.SignOutServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>signOutServlet</servlet-name>
-        <url-pattern>/signOut</url-pattern>
-    </servlet-mapping>
 </web-app>

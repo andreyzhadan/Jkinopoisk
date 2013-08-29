@@ -1,4 +1,4 @@
-package com.zhadan.controller;
+package com.zhadan.servlet;
 
 import org.apache.log4j.Logger;
 
@@ -22,7 +22,7 @@ public class SignOutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         logger.info("GET in logout");
         request.getSession().invalidate();
-        response.sendRedirect("/signIn.jsp");
+        response.sendRedirect("/v1servlet/signIn.jsp");
     }
 
     @Override

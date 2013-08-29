@@ -1,8 +1,7 @@
-package com.zhadan.controller;
+package com.zhadan.servlet;
 
 import com.zhadan.bean.User;
 import com.zhadan.dao.interfaces.UserDao;
-import com.zhadan.ownIoC.SpringInitServlet;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -18,8 +17,8 @@ import java.io.IOException;
  */
 public class SignUpServlet extends SpringInitServlet {
     private static final long serialVersionUID = 348015408215577254L;
-    private static final String INDEX_PAGE = "/home.jsp";
-    private static final String REG_PAGE = "/signUp.jsp";
+    private static final String INDEX_PAGE = "/v1servlet/home.jsp";
+    private static final String REG_PAGE = "/v1servlet/signUp.jsp";
     private static final Logger logger = Logger.getLogger(SignUpServlet.class.getName());
     //@ZhadanInject("userDao")
     //@Autowired
@@ -29,6 +28,12 @@ public class SignUpServlet extends SpringInitServlet {
 //    public void setUserDao(UserDao userDao) {
 //        this.userDao = userDao;
 //    }
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        userDao = (UserDao) getContext().getBean("userDao");
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

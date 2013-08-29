@@ -3,6 +3,7 @@ package com.zhadan.dao.interfaces;
 
 import com.zhadan.exceptions.DAOException;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 /**

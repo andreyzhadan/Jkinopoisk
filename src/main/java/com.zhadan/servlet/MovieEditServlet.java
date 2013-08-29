@@ -1,8 +1,7 @@
-package com.zhadan.controller;
+package com.zhadan.servlet;
 
 import com.zhadan.bean.Movie;
 import com.zhadan.dao.interfaces.MovieDao;
-import com.zhadan.ownIoC.SpringInitServlet;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -22,15 +21,19 @@ public class MovieEditServlet extends SpringInitServlet {
     private static final long serialVersionUID = -6777834847092077725L;
     private static final String PARAM_ID = "id";
     private static final String ATTRIBUTE_MOVIE = "movie";
-    private static final String PAGE_OK = "/movieEdit.jsp";
-    private static final String PAGE_ERROR = "/error.jsp";
+    private static final String PAGE_OK = "/v1servlet/movieEdit.jsp";
     private static final Logger logger = getLogger(MovieEditServlet.class.getName());
     //@ZhadanInject("movieDao")
     private MovieDao movieDao;
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void init() throws ServletException {
+        super.init();
         movieDao = (MovieDao) getContext().getBean("movieDao");
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idStr = req.getParameter(PARAM_ID);
         if (idStr != null) {
             final Integer id = Integer.valueOf(idStr);
@@ -44,7 +47,6 @@ public class MovieEditServlet extends SpringInitServlet {
             }
         }
         //ERROR
-        resp.sendRedirect(PAGE_ERROR);
-        logger.info("redirect to page " + PAGE_ERROR);
+        logger.error("error occur");
     }
 }

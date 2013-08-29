@@ -18,7 +18,7 @@
         <h3>Actors page</h3>
     </div>
 
-    <a href="/actorAdd.jsp" class="btn btn-primary myButton">New actor</a>
+    <a href="/v1servlet/actorAdd.jsp" class="btn btn-primary myButton">New actor</a>
 
     <customTags:actorsTag/>
 </div>

@@ -1,8 +1,7 @@
-package com.zhadan.controller;
+package com.zhadan.servlet;
 
 import com.zhadan.bean.Movie;
 import com.zhadan.dao.interfaces.MovieDao;
-import com.zhadan.ownIoC.SpringInitServlet;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -21,9 +20,16 @@ import static org.apache.log4j.Logger.getLogger;
 public class MovieAddServlet extends SpringInitServlet {
     private static final long serialVersionUID = 4787141816316166489L;
     private static final Logger logger = getLogger(MovieAddServlet.class.getSimpleName());
-    private static final String MOVIE_ADD_PAGE = "/movieAdd.jsp";
+    private static final String MOVIE_ADD_PAGE = "/v1servlet/movieAdd.jsp";
+    private static final String MOVIES_PAGE = "/v1servlet/movies";
     //@ZhadanInject("movieDao")
     private MovieDao movieDao;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        movieDao = (MovieDao) getContext().getBean("movieDao");
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,7 +39,6 @@ public class MovieAddServlet extends SpringInitServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            movieDao = (MovieDao) getContext().getBean("movieDao");
             String name = req.getParameter("name");
             String russianName = req.getParameter("russianName");
             Float rating = Float.valueOf(req.getParameter("rating"));
@@ -44,7 +49,7 @@ public class MovieAddServlet extends SpringInitServlet {
             movieDao.create(movie);
             logger.debug("Insert new movie " + movie);
             logger.debug("Send redirect to movies page");
-            resp.sendRedirect("/movies");
+            resp.sendRedirect(MOVIES_PAGE);
         } catch (Exception ex) {
             logger.error("Send redirect back to movieAdd page because of not valid data");
             resp.sendRedirect(MOVIE_ADD_PAGE);

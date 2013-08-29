@@ -1,4 +1,4 @@
-package com.zhadan.ownIoC;
+package com.zhadan.servlet;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -22,7 +22,7 @@ public class SpringInitServlet extends HttpServlet {
     static {
         baseLogger.info("First incoming in SpringInitServlet...");
         context = new ClassPathXmlApplicationContext(
-                "ApplicationContext.xml");
+                "WEB-INF/spring-servlet.xml");
     }
 
     private static final long serialVersionUID = -1559461563277942928L;

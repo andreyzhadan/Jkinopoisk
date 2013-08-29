@@ -18,7 +18,7 @@
     <%for (Actor actor : (List<Actor>) request.getAttribute("actors")) {%>
     <tr>
         <td>
-            <a href="/actorEdit?id=<%=actor.getId()%>">
+            <a href="/v1servlet/actorEdit?id=<%=actor.getId()%>">
                 <%=actor.getId()%>
             </a>
         </td>

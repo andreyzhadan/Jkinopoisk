@@ -4,15 +4,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Register page</title>
+    <title>Login page</title>
 </head>
 <body>
 <div class="container">
-    <%@include file="/header.jsp" %>
-    <form class="form-horizontal well well-large" action="/signUp" method="post">
+    <%@include file="header.jsp" %>
+    <form class="form-horizontal well well-large" action="/v1servlet/signIn" method="post">
         <fieldset>
             <div id="legend">
-                <legend class="">Sign Up</legend>
+                <legend class="">Sign In</legend>
             </div>
             <div class="control-group">
                 <label class="control-label" for="login">Login</label>
@@ -29,15 +29,8 @@
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="password2">Confirm password</label>
-
                 <div class="controls">
-                    <input type="password" id="password2" name="password2" placeholder="" class="myInput">
-                </div>
-            </div>
-            <div class="control-group">
-                <div class="controls">
-                    <button class="btn btn-primary">Register</button>
+                    <button class="btn btn-warning">Login</button>
                 </div>
             </div>
         </fieldset>

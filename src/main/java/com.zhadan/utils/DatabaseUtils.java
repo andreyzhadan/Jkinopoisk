@@ -43,14 +43,14 @@ public final class DatabaseUtils {
     }
 
     /**
-     * Quietly close the ResultSet. Any errors will be printed to the logger.
+     * Quietly close the Connection. Any errors will be printed to the logger.
      *
-     * @param resultSet The ResultSet to be closed quietly.
+     * @param connection The Connection to be closed quietly.
      */
-    public static void close(ResultSet resultSet) {
-        if (resultSet != null) {
+    public static void close(Connection connection) {
+        if (connection != null) {
             try {
-                resultSet.close();
+                connection.close();
             } catch (SQLException e) {
                 logger.error("Closing Connection failed: " + e.getMessage());
             }
@@ -73,25 +73,25 @@ public final class DatabaseUtils {
     }
 
     /**
-     * Quietly close the Connection. Any errors will be printed to the logger.
+     * Quietly close the ResultSet. Any errors will be printed to the logger.
      *
-     * @param connection The Connection to be closed quietly.
+     * @param resultSet The ResultSet to be closed quietly.
      */
-    public static void close(Connection connection) {
-        if (connection != null) {
+    public static void close(ResultSet resultSet) {
+        if (resultSet != null) {
             try {
-                connection.close();
+                resultSet.close();
             } catch (SQLException e) {
                 logger.error("Closing Connection failed: " + e.getMessage());
             }
         }
     }
 
-    public static void recreateTable(BasicDataSource basicDataSource, String script) {
+    public static void recreateTable(BasicDataSource basicDataSource, String script, String name) {
         try {
             Connection connection = basicDataSource.getConnection();
             Statement statement = connection.createStatement();
-            statement.execute("DROP TABLE actor if exists ");
+            statement.execute("DROP TABLE " + name + " if exists ");
             Statement statement2 = connection.createStatement();
             statement2.execute(script);
             statement.close();

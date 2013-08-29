@@ -1,6 +1,7 @@
 package com.zhadan;
 
 import com.zhadan.bean.Actor;
+import com.zhadan.dao.interfaces.ActorDao;
 import com.zhadan.dao.jdbc.ActorDaoJdbcImpl;
 import com.zhadan.exceptions.DAOException;
 import org.apache.commons.dbcp.BasicDataSource;
@@ -26,11 +27,11 @@ import static org.hamcrest.core.IsNull.nullValue;
  * Date: 8/6/13
  * Time: 10:27 AM
  */
-public class ActorDaoTest {
+public class ActorDaoJdbcTest {
 
     private static final String url = "jdbc:h2:jkinopoisk";
-    private static final Logger logger = getLogger(ActorDaoTest.class.getSimpleName());
-    private static ActorDaoJdbcImpl actorDao;
+    private static final Logger logger = getLogger(ActorDaoJdbcTest.class.getSimpleName());
+    private static ActorDao actorDao;
     private static BasicDataSource dataSource;
 
     @BeforeClass
@@ -46,7 +47,7 @@ public class ActorDaoTest {
     public void setUp() throws Exception {
         logger.debug("SetUp method in actorDaoTest");
         String actorCreateScript = "CREATE TABLE actor(id INT PRIMARY KEY AUTO_INCREMENT,firstName VARCHAR(45),lastName VARCHAR(45),birthday INT,country VARCHAR(45))";
-        recreateTable(dataSource, actorCreateScript);
+        recreateTable(dataSource, actorCreateScript, "actor");
         String actorInsertScript = "insert into actor (firstName,lastName,birthday,country) values ('Brad','Pitt',1963,'USA'),('Jason','Statham',1967,'England'),('John','Travolta',1954,'USA'),('Scarlett','Johansson',1984,'USA'),('Bruce','Willis',1955,'Germany'),('Morgan','Freeman',1937,'USA'),('Vinnie','Jones',1965,'England')";
         insertData(dataSource, actorInsertScript);
     }

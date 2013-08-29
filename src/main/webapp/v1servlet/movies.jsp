@@ -18,7 +18,7 @@ Time: 23:23
         <h3>Movies page</h3>
     </div>
 
-    <a href="/movieAdd.jsp" class="btn btn-primary myButton">New movie</a>
+    <a href="/v1servlet/movieAdd.jsp" class="btn btn-primary myButton">New movie</a>
 
     <customTags:moviesTag/>
 </div>

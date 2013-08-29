@@ -6,6 +6,7 @@ import com.zhadan.exceptions.DAOException;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,22 +21,22 @@ import static org.apache.log4j.Logger.getLogger;
  */
 @Repository
 public class UserDaoHibernateImpl implements BasicDao<User> {
-    private static final Logger logger = getLogger(UserDaoHibernateImpl.class.getSimpleName());
     //@Autowired
     private SessionFactory sessionFactory;
 
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     @Override
     public User find(Integer id) throws DAOException {
-        return null;
+        User user = (User) getCurrentSession().get(User.class, id);
+        return user;
     }
 
     @Override
     public List<User> list() throws DAOException {
         return getCurrentSession().createQuery("from User").list();
-    }
-
-    protected final Session getCurrentSession() {
-        return sessionFactory.getCurrentSession();
     }
 
     @Override
@@ -45,10 +46,18 @@ public class UserDaoHibernateImpl implements BasicDao<User> {
 
     @Override
     public void update(User entity) throws IllegalArgumentException, DAOException {
+        User userToUpdate = find(entity.getId());
+        userToUpdate.setLogin(entity.getLogin());
+        userToUpdate.setPassword(entity.getPassword());
+        getCurrentSession().update(userToUpdate);
     }
 
     @Override
     public void delete(User entity) throws DAOException {
         getCurrentSession().delete(entity);
+    }
+
+    protected final Session getCurrentSession() {
+        return sessionFactory.getCurrentSession();
     }
 }

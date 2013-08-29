@@ -5,6 +5,7 @@ import com.zhadan.dao.interfaces.MovieDao;
 import com.zhadan.exceptions.DAOException;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -16,7 +17,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.zhadan.utils.DatabaseUtils.close;
-import static com.zhadan.utils.DatabaseUtils.createDataSource;
 import static org.apache.log4j.Logger.getLogger;
 
 /**
@@ -25,23 +25,13 @@ import static org.apache.log4j.Logger.getLogger;
  * Date: 01.08.13
  * Time: 22:34
  */
-@Component
+@Repository
 public class MovieDaoJdbcImpl implements MovieDao {
     private static final Logger logger = getLogger(MovieDaoJdbcImpl.class.getName());
-    private static final String SELECT_ALL = "select * from movie";
-    private static final String SELECT_BY_ID = "select * from movie where id=?";
-    private static final String INSERT = "insert into movie (name,russianName,rating,slogan,year,country) values (?,?,?,?,?,?)";
-    private static final String UPDATE = "update movie set name=?,russianName=?,rating=?,slogan=?,year=?,country=?, where id=?";
-    private static final String DELETE = "delete from movie where id=?";
     private DataSource dataSource;
 
-
     public MovieDaoJdbcImpl() {
-        dataSource = createDataSource();
-    }
-
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
+        //dataSource = createDataSource();
     }
 
     @Override
@@ -52,7 +42,6 @@ public class MovieDaoJdbcImpl implements MovieDao {
         Movie movie = null;
         try {
             connection = dataSource.getConnection();
-
             ps = connection.prepareStatement(SELECT_BY_ID);
             ps.setInt(1, id);
             rs = ps.executeQuery();
@@ -112,7 +101,7 @@ public class MovieDaoJdbcImpl implements MovieDao {
         ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
-            ps = connection.prepareStatement(INSERT);
+            ps = connection.prepareStatement(INSERT_SQL);
             ps.setString(1, entity.getName());
             ps.setString(2, entity.getRussianName());
             ps.setFloat(3, entity.getRating());
@@ -135,7 +124,7 @@ public class MovieDaoJdbcImpl implements MovieDao {
         ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
-            ps = connection.prepareStatement(UPDATE);
+            ps = connection.prepareStatement(UPDATE_SQL);
             ps.setString(1, entity.getName());
             ps.setString(2, entity.getRussianName());
             ps.setFloat(3, entity.getRating());
@@ -161,7 +150,7 @@ public class MovieDaoJdbcImpl implements MovieDao {
         ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
-            ps = connection.prepareStatement(DELETE);
+            ps = connection.prepareStatement(DELETE_SQL);
             ps.setInt(1, entity.getId());
             int affectedRows = ps.executeUpdate();
             logger.debug("You are trying to delete movie");
@@ -173,6 +162,11 @@ public class MovieDaoJdbcImpl implements MovieDao {
         } finally {
             close(connection, ps, rs);
         }
+    }
+
+    @Override
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
 }

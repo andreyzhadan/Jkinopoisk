@@ -1,6 +1,8 @@
 package com.zhadan.controller;
 
+import com.zhadan.bean.Role;
 import com.zhadan.bean.User;
+import com.zhadan.dao.interfaces.RoleDao;
 import com.zhadan.dao.interfaces.UserDao;
 import com.zhadan.validation.AuthValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ import javax.validation.Valid;
 public class AuthController {
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private RoleDao roleDao;
     @Autowired
     private AuthValidator authValidator;
 
@@ -62,6 +66,12 @@ public class AuthController {
             return "/signUp";
         }
         userDao.create(user);
+        roleDao.create(new Role(userDao.findByLogin(user.getUserName()).getId(), "ROLE_USER"));
         return "redirect:/home";
+    }
+
+    @RequestMapping(value = "/securityAccessDenied", method = RequestMethod.GET)
+    public String permissionDenied() {
+        return "/securityAccessDenied";
     }
 }

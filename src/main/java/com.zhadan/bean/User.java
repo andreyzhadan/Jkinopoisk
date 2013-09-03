@@ -30,9 +30,6 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public User(String userName, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
-    }
-
     public String getPassword2() {
         return password2;
     }
@@ -54,19 +51,19 @@ public class User implements Serializable {
         return this.getUserName() + " / " + this.getPassword();
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getUserName() {
         return userName;
     }
 
     public void setUserName(String login) {
         this.userName = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

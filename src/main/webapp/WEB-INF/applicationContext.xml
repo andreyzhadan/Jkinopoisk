@@ -44,6 +44,9 @@
     <bean id="userDao" class="com.zhadan.dao.jdbcTemplates.UserDaoJdbcTemplateImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
+    <bean id="roleDao" class="com.zhadan.dao.jdbcTemplates.RoleDaoJdbcTemplateImpl">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
 
     <!--Validation && messages-->
     <bean id="actorValidator" class="com.zhadan.validation.ActorValidator"/>
@@ -53,6 +56,11 @@
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basenames" value="classpath:messages"/>
         <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+
+    <!--AccessDeniedHandler-->
+    <bean id="accessDeniedHandler" class="com.zhadan.handler.JKinopoiskAccessDeniedHandler">
+        <property name="accessDeniedUrl" value="403"/>
     </bean>
 
     <!--Internalization-->

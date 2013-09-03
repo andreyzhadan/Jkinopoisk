@@ -59,6 +59,7 @@ public class UserDaoJdbcImpl implements UserDao {
             rs = ps.executeQuery();
             if (rs.next()) {
                 user = new User();
+                user.setId(rs.getInt("id"));
                 user.setUserName(rs.getString("userName"));
                 user.setPassword(rs.getString("password"));
                 logger.info(user);

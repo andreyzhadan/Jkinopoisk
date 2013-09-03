@@ -25,6 +25,7 @@ public class UserDaoJdbcTemplateImpl implements UserDao {
         @Override
         public User mapRow(ResultSet resultSet, int i) throws SQLException {
             User user = new User();
+            user.setId(resultSet.getInt("id"));
             user.setUserName(resultSet.getString("userName"));
             user.setPassword(resultSet.getString("password"));
             return user;

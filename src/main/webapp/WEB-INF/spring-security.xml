@@ -8,18 +8,28 @@
 
     <http pattern="/favicon.ico" security="none"/>
     <http use-expressions="true" auto-config="true">
-        <form-login login-page="/signIn"
-                    default-target-url="/home"
-                    authentication-failure-url="/signInFailed"/>
         <intercept-url pattern="/signIn" access="!denyAll()"/>
         <intercept-url pattern="/signInFailed" access="!denyAll()"/>
         <intercept-url pattern="/signOut" access="!denyAll()"/>
         <intercept-url pattern="/signUp" access="!denyAll()"/>
+
         <intercept-url pattern="/deleteMovie/*" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/deleteActor/*" access="hasRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/*" access="hasRole('ROLE_USER')"/>
+
+        <intercept-url pattern="/*" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')"/>
+
+        <remember-me key="jkinopoiskKey"
+                     token-validity-seconds="2419200"/>
+
+        <form-login login-page="/signIn"
+                    default-target-url="/home"
+                    authentication-failure-url="/signInFailed"/>
         <logout logout-success-url="/"/>
+
+        <access-denied-handler ref="accessDeniedHandler"/>
     </http>
+
+    <!--<global-method-security secured-annotations="enabled"/>-->
 
     <authentication-manager alias="authenticationManager">
         <authentication-provider>

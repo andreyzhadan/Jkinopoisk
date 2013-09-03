@@ -72,6 +72,7 @@ public class HibernateTest {
         User newUser = new User("andrey", "1111");
         session.save(newUser);
         System.out.println(newUser);
+        session.delete(newUser);
     }
 
     @After

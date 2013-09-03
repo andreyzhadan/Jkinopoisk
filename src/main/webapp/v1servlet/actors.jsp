@@ -1,4 +1,4 @@
-<%@ taglib prefix="customTags" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="customTags" tagdir="/WEB-INF/tags/v1servlet" %>
 <%--
   Created by IntelliJ IDEA.
   User: azhadan

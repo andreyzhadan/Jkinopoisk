@@ -5,7 +5,6 @@ import com.zhadan.dao.interfaces.UserDao;
 import com.zhadan.exceptions.DAOException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -26,7 +25,7 @@ public class UserDaoJdbcTemplateImpl implements UserDao {
         @Override
         public User mapRow(ResultSet resultSet, int i) throws SQLException {
             User user = new User();
-            user.setLogin(resultSet.getString("login"));
+            user.setUserName(resultSet.getString("userName"));
             user.setPassword(resultSet.getString("password"));
             return user;
         }
@@ -35,12 +34,12 @@ public class UserDaoJdbcTemplateImpl implements UserDao {
 
     @Override
     public void create(User user) throws IllegalArgumentException, DAOException {
-        jdbc.update(INSERT_SQL, new Object[]{user.getLogin(), user.getPassword()});
+        jdbc.update(INSERT_SQL, new Object[]{user.getUserName(), user.getPassword()});
     }
 
     @Override
-    public User findByLogin(String login) {
-        List<User> userList = jdbc.query(SELECT_SQL, new Object[]{login}, USER_ROW_MAPPER);
+    public User findByLogin(String userName) {
+        List<User> userList = jdbc.query(SELECT_SQL, new Object[]{userName}, USER_ROW_MAPPER);
         if (userList.isEmpty()) {
             return null;
         }
@@ -48,17 +47,18 @@ public class UserDaoJdbcTemplateImpl implements UserDao {
     }
 
     @Override
-    public User validateUser(String login, String password) {
-        if (login == null || password == null) {
+    public User validateUser(String userName, String password) {
+        if (userName == null || password == null) {
             return null;
         }
-        User user = findByLogin(login);
+        User user = findByLogin(userName);
         if (user == null || !user.getPassword().equals(password.trim())) {
             return null;
         }
         return user;
     }
 
+    @Override
     public void setDataSource(DataSource dataSource) {
         this.jdbc = new JdbcTemplate(dataSource);
     }

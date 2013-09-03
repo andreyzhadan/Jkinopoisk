@@ -4,18 +4,15 @@ import com.zhadan.bean.User;
 import com.zhadan.dao.interfaces.UserDao;
 import com.zhadan.exceptions.DAOException;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import static com.zhadan.utils.DatabaseUtils.close;
-import static com.zhadan.utils.DatabaseUtils.createDataSource;
 import static org.apache.log4j.Logger.getLogger;
 
 /**
@@ -24,6 +21,7 @@ import static org.apache.log4j.Logger.getLogger;
 @Repository
 public class UserDaoJdbcImpl implements UserDao {
     private static final Logger logger = getLogger(UserDaoJdbcImpl.class.getSimpleName());
+    @Autowired
     private DataSource dataSource;
 
     public UserDaoJdbcImpl() {
@@ -38,7 +36,7 @@ public class UserDaoJdbcImpl implements UserDao {
         try {
             connection = dataSource.getConnection();
             ps = connection.prepareStatement(INSERT_SQL);
-            ps.setString(1, user.getLogin());
+            ps.setString(1, user.getUserName());
             ps.setString(2, user.getPassword());
             ps.executeUpdate();
         } catch (Exception e) {
@@ -49,7 +47,7 @@ public class UserDaoJdbcImpl implements UserDao {
     }
 
     @Override
-    public User findByLogin(String login) {
+    public User findByLogin(String userName) {
         Connection connection = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -57,11 +55,11 @@ public class UserDaoJdbcImpl implements UserDao {
         try {
             connection = dataSource.getConnection();
             ps = connection.prepareStatement(SELECT_SQL);
-            ps.setString(1, login);
+            ps.setString(1, userName);
             rs = ps.executeQuery();
             if (rs.next()) {
                 user = new User();
-                user.setLogin(rs.getString("login"));
+                user.setUserName(rs.getString("userName"));
                 user.setPassword(rs.getString("password"));
                 logger.info(user);
             }
@@ -74,11 +72,11 @@ public class UserDaoJdbcImpl implements UserDao {
     }
 
     @Override
-    public User validateUser(String login, String password) {
-        if (login == null || password == null) {
+    public User validateUser(String userName, String password) {
+        if (userName == null || password == null) {
             return null;
         }
-        User user = findByLogin(login);
+        User user = findByLogin(userName);
         if (user == null || !user.getPassword().equals(password.trim())) {
             return null;
         }

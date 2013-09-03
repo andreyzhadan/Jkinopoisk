@@ -9,14 +9,14 @@ import javax.sql.DataSource;
  * Created by azhadan on 8/1/13.
  */
 public interface UserDao {
-    public static final String SELECT_SQL = "select * from users where login=?";
-    public static final String INSERT_SQL = "insert into users (login,password) values (?,?)";
+    public static final String SELECT_SQL = "select * from users where userName=?";
+    public static final String INSERT_SQL = "insert into users (userName,password) values (?,?)";
 
     public void create(User user) throws IllegalArgumentException, DAOException;
 
-    public User findByLogin(String login);
+    public User findByLogin(String userName);
 
-    public User validateUser(String login, String password);
+    public User validateUser(String userName, String password);
 
     public void setDataSource(DataSource dataSource);
 }

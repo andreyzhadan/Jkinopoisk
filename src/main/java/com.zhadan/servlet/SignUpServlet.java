@@ -49,10 +49,10 @@ public class SignUpServlet extends SpringInitServlet {
         String password2 = req.getParameter("password2");
         if (login != null && userDao.findByLogin(login) == null && !password.isEmpty() && password.equals(password2)) {
             User user = new User();
-            user.setLogin(login);
+            user.setUserName(login);
             user.setPassword(password);
             userDao.create(user);
-            req.getSession().setAttribute("login", user.getLogin());
+            req.getSession().setAttribute("login", user.getUserName());
             req.getSession().setAttribute("user", user);
             resp.sendRedirect(INDEX_PAGE);
         } else {

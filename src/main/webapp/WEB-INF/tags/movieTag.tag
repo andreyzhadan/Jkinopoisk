@@ -1,58 +1,55 @@
-<%@ attribute name="movie" type="com.zhadan.bean.Movie" %>
-<%@ tag import="com.zhadan.bean.Movie" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="control-group">
-    <label class="control-label" for="id">Id</label>
-
+    <form:label cssClass="control-label" path="name">
+        Name:
+    </form:label>
     <div class="controls">
-        <input type="text" id="id" name="id" placeholder="" class="myInput"
-               value="<%if (movie!=null) out.println(movie.getId());%>" disabled="true">
+        <form:input path="name" class="myInput"/>
+        <form:errors path="name" cssStyle="color: red;"/>
     </div>
 </div>
 <div class="control-group">
-    <label class="control-label" for="name">Name</label>
-
+    <form:label cssClass="control-label" path="russianName">
+        Russian Name:
+    </form:label>
     <div class="controls">
-        <input type="text" id="name" name="name" placeholder="" class="myInput"
-               value="<%if (movie!=null) out.println(movie.getName());%>">
+        <form:input path="russianName" class="myInput"/>
+        <form:errors path="russianName" cssStyle="color: red;"/>
     </div>
 </div>
 <div class="control-group">
-    <label class="control-label" for="russianName">Russian Name</label>
-
+    <form:label cssClass="control-label" path="rating">
+        Rating:
+    </form:label>
     <div class="controls">
-        <input type="text" id="russianName" name="russianName" placeholder="" class="myInput"
-               value="<%if (movie!=null) out.println(movie.getRussianName());%>">
+        <form:input path="rating" class="myInput"/>
+        <form:errors path="rating" cssStyle="color: red;"/>
     </div>
 </div>
 <div class="control-group">
-    <label class="control-label" for="rating">Rating</label>
-
+    <form:label cssClass="control-label" path="slogan">
+        Slogan:
+    </form:label>
     <div class="controls">
-        <input type="text" id="rating" name="rating" placeholder="" class="myInput"
-               value="<%if (movie!=null) out.println(movie.getRating());%>">
+        <form:input path="slogan" class="myInput"/>
+        <form:errors path="slogan" cssStyle="color: red;"/>
     </div>
 </div>
 <div class="control-group">
-    <label class="control-label" for="slogan">Slogan</label>
-
+    <form:label cssClass="control-label" path="year">
+        Year:
+    </form:label>
     <div class="controls">
-        <input type="text" id="slogan" name="slogan" placeholder="" class="myInput"
-               value="<%if (movie!=null) out.println(movie.getSlogan());%>">
+        <form:input path="year" class="myInput"/>
+        <form:errors path="year" cssStyle="color: red;"/>
     </div>
 </div>
 <div class="control-group">
-    <label class="control-label" for="year">Year</label>
-
+    <form:label cssClass="control-label" path="country">
+        Country:
+    </form:label>
     <div class="controls">
-        <input type="text" id="year" name="year" placeholder="" class="myInput"
-               value="<%if (movie!=null) out.println(movie.getYear());%>">
-    </div>
-</div>
-<div class="control-group">
-    <label class="control-label" for="country">Country</label>
-
-    <div class="controls">
-        <input type="text" id="country" name="country" placeholder="" class="myInput"
-               value="<%if (movie!=null) out.println(movie.getCountry());%>">
+        <form:input path="country" class="myInput"/>
+        <form:errors path="country" cssStyle="color: red;"/>
     </div>
 </div>

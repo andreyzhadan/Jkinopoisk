@@ -1,7 +1,10 @@
 package com.zhadan.bean;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 /**
  * Created by azhadan on 7/30/13.
@@ -13,20 +16,29 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String login;
+    private String userName;
     private String password;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name = "user_roles",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
-    private Role role;
+    @Transient
+    private String password2;
 
     public User() {
+
     }
 
-    public User(String login, String password) {
-        this.login = login;
+    public User(String userName, String password) {
+        this.userName = userName;
         this.password = password;
+    }
+
+    public User(String userName, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
+    }
+
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
     }
 
     public int getId() {
@@ -37,20 +49,9 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+    @Override
+    public String toString() {
+        return this.getUserName() + " / " + this.getPassword();
     }
 
     public String getPassword() {
@@ -61,8 +62,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return this.getLogin() + " / " + this.getPassword();
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String login) {
+        this.userName = login;
     }
 }

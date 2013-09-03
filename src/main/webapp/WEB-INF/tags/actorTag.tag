@@ -1,42 +1,37 @@
-<%@ attribute name="actor" type="com.zhadan.bean.Actor" %>
-<%@ tag import="com.zhadan.bean.Actor" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="control-group">
-    <label class="control-label" for="id">Id</label>
-
+    <form:label cssClass="control-label" path="firstName">
+        First Name:
+    </form:label>
     <div class="controls">
-        <input type="text" id="id" name="id" placeholder="" class="myInput"
-               value="<%if (actor!=null) out.println(actor.getId());%>" disabled="true">
+        <form:input path="firstName" class="myInput"/>
+        <form:errors path="firstName" cssStyle="color: red;"/>
     </div>
 </div>
 <div class="control-group">
-    <label class="control-label" for="firstName">First Name</label>
-
+    <form:label cssClass="control-label" path="lastName">
+        Last Name:
+    </form:label>
     <div class="controls">
-        <input type="text" id="firstName" name="firstName" placeholder="" class="myInput"
-               value="<%if (actor!=null) out.println(actor.getFirstName());%>">
+        <form:input path="lastName" class="myInput"/>
+        <form:errors path="lastName" cssStyle="color: red;"/>
     </div>
 </div>
 <div class="control-group">
-    <label class="control-label" for="lastName">Last Name</label>
-
+    <form:label cssClass="control-label" path="birthday">
+        Birthday:
+    </form:label>
     <div class="controls">
-        <input type="text" id="lastName" name="lastName" placeholder="" class="myInput"
-               value="<%if (actor!=null) out.println(actor.getLastName());%>">
+        <form:input path="birthday" class="myInput"/>
+        <form:errors path="birthday" cssStyle="color: red;"/>
     </div>
 </div>
 <div class="control-group">
-    <label class="control-label" for="birthday">Birthday</label>
-
+    <form:label cssClass="control-label" path="country">
+        Country:
+    </form:label>
     <div class="controls">
-        <input type="text" id="birthday" name="birthday" placeholder="" class="myInput"
-               value="<%if (actor!=null) out.println(actor.getBirthday());%>">
-    </div>
-</div>
-<div class="control-group">
-    <label class="control-label" for="country">Country</label>
-
-    <div class="controls">
-        <input type="text" id="country" name="country" placeholder="" class="myInput"
-               value="<%if (actor!=null) out.println(actor.getCountry());%>">
+        <form:input path="country" class="myInput"/>
+        <form:errors path="country" cssStyle="color: red;"/>
     </div>
 </div>

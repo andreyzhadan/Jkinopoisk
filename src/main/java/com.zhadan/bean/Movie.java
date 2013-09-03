@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -101,12 +102,12 @@ public class Movie implements Serializable {
         return builder.toString();
     }
 
-    public int getYear() {
-        return year;
+    public int getId() {
+        return id;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -117,11 +118,11 @@ public class Movie implements Serializable {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getYear() {
+        return year;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setYear(int year) {
+        this.year = year;
     }
 }

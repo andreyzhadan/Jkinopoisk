@@ -22,6 +22,5 @@
 
         <!--mapping-->
         <mapping class="com.zhadan.bean.User"/>
-        <mapping class="com.zhadan.bean.Role"/>
     </session-factory>
 </hibernate-configuration>

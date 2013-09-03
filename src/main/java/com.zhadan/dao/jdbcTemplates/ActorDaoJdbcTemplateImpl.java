@@ -3,6 +3,7 @@ package com.zhadan.dao.jdbcTemplates;
 import com.zhadan.bean.Actor;
 import com.zhadan.dao.interfaces.ActorDao;
 import com.zhadan.exceptions.DAOException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -67,6 +68,7 @@ public class ActorDaoJdbcTemplateImpl implements ActorDao {
         jdbc.update(DELETE_SQL, entity.getId());
     }
 
+    @Override
     public void setDataSource(DataSource dataSource) {
         this.jdbc = new JdbcTemplate(dataSource);
     }

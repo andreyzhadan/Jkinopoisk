@@ -58,7 +58,7 @@ public class HibernateTest {
     @Test
     public void testSelectWhereCriteria() throws SQLException {
         Criteria criteria = session.createCriteria(User.class);
-        criteria.add(eq("login", "andrey"))
+        criteria.add(eq("userName", "andrey"))
                 .add(ge("id", 2))
                 .addOrder(desc("id"));
         List<User> allUsers = criteria.list();

@@ -3,10 +3,8 @@ package com.zhadan.dao.hibernate;
 import com.zhadan.bean.User;
 import com.zhadan.dao.interfaces.BasicDao;
 import com.zhadan.exceptions.DAOException;
-import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -47,7 +45,7 @@ public class UserDaoHibernateImpl implements BasicDao<User> {
     @Override
     public void update(User entity) throws IllegalArgumentException, DAOException {
         User userToUpdate = find(entity.getId());
-        userToUpdate.setLogin(entity.getLogin());
+        userToUpdate.setUserName(entity.getUserName());
         userToUpdate.setPassword(entity.getPassword());
         getCurrentSession().update(userToUpdate);
     }

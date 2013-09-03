@@ -4,12 +4,14 @@ import com.zhadan.bean.Actor;
 import com.zhadan.bean.Movie;
 import com.zhadan.dao.interfaces.MovieDao;
 import com.zhadan.exceptions.DAOException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,6 +33,7 @@ public class MovieDaoJdbcTemplateImpl implements MovieDao {
             movie.setName(resultSet.getString("name"));
             movie.setRussianName(resultSet.getString("russianName"));
             movie.setId(resultSet.getInt("id"));
+            movie.setRating(resultSet.getFloat("rating"));
             movie.setYear(resultSet.getInt("year"));
             movie.setSlogan(resultSet.getString("slogan"));
             movie.setCountry(resultSet.getString("country"));
@@ -73,4 +76,9 @@ public class MovieDaoJdbcTemplateImpl implements MovieDao {
     public void setDataSource(DataSource dataSource) {
         this.jdbc = new JdbcTemplate(dataSource);
     }
+
+//    @PostConstruct
+//    public void customInit() {
+//        System.out.println("Method customInit() invoked...");
+//    }
 }

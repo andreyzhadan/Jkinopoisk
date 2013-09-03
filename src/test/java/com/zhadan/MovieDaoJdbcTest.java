@@ -3,6 +3,7 @@ package com.zhadan;
 import com.zhadan.bean.Movie;
 import com.zhadan.dao.interfaces.MovieDao;
 import com.zhadan.dao.jdbc.MovieDaoJdbcImpl;
+import com.zhadan.dao.jdbcTemplates.MovieDaoJdbcTemplateImpl;
 import com.zhadan.exceptions.DAOException;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
@@ -115,7 +116,7 @@ public class MovieDaoJdbcTest {
         assertThat("number of movies", movies.size(), is(6));
     }
 
-    @Test(expected = DAOException.class)
+    @Test(expected = DAOException.class) //DAOException
     public void testDeleteNonExisting() throws Exception {
         //delete not existing movie
         Movie movie = new Movie();
@@ -141,22 +142,21 @@ public class MovieDaoJdbcTest {
 
     @Test
     public void testUpdate() throws Exception {
-        Movie movie = new Movie();
-        movie.setId(2);
+        Movie movie = movieDao.find(2);
         movie.setName("Red");
         movie.setRussianName("РЭД");
         movie.setRating(7.277f);
-        movie.setYear(2010);
+        movie.setYear(2014);
         movie.setCountry("USA");
         movie.setSlogan("Бывших агентов не бывает");
         movieDao.update(movie);
 
         movie = movieDao.find(2);
         assertThat("update movie", movie.getCountry(), equalTo("USA"));
-        assertThat("update movie", movie.getYear(), equalTo(2010));
+        assertThat("update movie", movie.getYear(), equalTo(2014));
     }
 
-    @Test(expected = DAOException.class)
+    @Test(expected = DAOException.class) //DAOException
     public void testUpdateNonExisting() throws Exception {
         Movie movie = new Movie();
         movie.setId(50);

@@ -45,7 +45,7 @@ public class SignInServlet extends SpringInitServlet {
             rd = req.getRequestDispatcher(LOGIN_PAGE);
             rd.forward(req, resp);
         } else {
-            req.getSession().setAttribute("login", user.getLogin());
+            req.getSession().setAttribute("login", user.getUserName());
             req.getSession().setAttribute("user", user);
             resp.sendRedirect(INDEX_PAGE);
         }

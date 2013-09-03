@@ -4,6 +4,7 @@ import com.zhadan.bean.Actor;
 import com.zhadan.dao.interfaces.ActorDao;
 import com.zhadan.exceptions.DAOException;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -28,6 +29,7 @@ import static org.apache.log4j.Logger.getLogger;
 @Repository
 public class ActorDaoJdbcImpl implements ActorDao {
     private static final Logger logger = getLogger(ActorDaoJdbcImpl.class.getSimpleName());
+    @Autowired
     private DataSource dataSource;
 
     public ActorDaoJdbcImpl() {

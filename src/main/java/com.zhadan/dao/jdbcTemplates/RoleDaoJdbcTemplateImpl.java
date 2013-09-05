@@ -36,7 +36,6 @@ public class RoleDaoJdbcTemplateImpl implements RoleDao {
         jdbc.update(INSERT_SQL, new Object[]{role.getUserId(), role.getRoleName()});
     }
 
-    @Override
     public void setDataSource(DataSource dataSource) {
         this.jdbc = new JdbcTemplate(dataSource);
     }

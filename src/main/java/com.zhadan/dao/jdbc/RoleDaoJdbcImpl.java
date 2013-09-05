@@ -46,7 +46,6 @@ public class RoleDaoJdbcImpl implements RoleDao {
         }
     }
 
-    @Override
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }

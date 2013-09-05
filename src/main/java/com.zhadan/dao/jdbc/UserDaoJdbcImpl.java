@@ -84,7 +84,6 @@ public class UserDaoJdbcImpl implements UserDao {
         return user;
     }
 
-    @Override
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }

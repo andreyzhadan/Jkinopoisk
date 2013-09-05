@@ -10,8 +10,22 @@
 <head>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.0.3.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/multizoom.js"/>"></script>
     <link type="text/css" href="<c:url value="/resources/css/bootstrap.css"/>" rel="stylesheet">
     <link type="text/css" href="<c:url value="/resources/css/jkinopoisk.css"/>" rel="stylesheet">
+    <link type="text/css" href="<c:url value="/resources/css/multizoom.css"/>" rel="stylesheet">
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $('#image1').addimagezoom({ // single image zoom
+                zoomrange: [3, 5],
+                magnifiersize: [600, 400],
+                magnifierpos: 'right',
+                cursorshade: true,
+                largeimage: '${movie.picture}' //<-- No comma after last option!
+            })
+        });
+    </script>
 </head>
 <div class="navbar">
     <div class="navbar-inner">

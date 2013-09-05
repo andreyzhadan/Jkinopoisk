@@ -31,7 +31,7 @@ public class ActorDaoJdbcTest {
 
     private static final String url = "jdbc:h2:jkinopoisk";
     private static final Logger logger = getLogger(ActorDaoJdbcTest.class.getSimpleName());
-    private static ActorDao actorDao;
+    private static ActorDaoJdbcImpl actorDao;
     private static BasicDataSource dataSource;
 
     @BeforeClass

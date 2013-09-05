@@ -12,36 +12,44 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Add movie page</title>
+    <title>Edit movie page</title>
 </head>
 
 <body>
 <div class="container">
     <%@include file="header.jsp" %>
-    <form:form method="post" action="/editMovie" commandName="movie" class="form-horizontal well well-large">
-        <fieldset>
-            <div id="legend">
-                <legend class="">Movie edit page</legend>
-            </div>
-            <div class="control-group" hidden="true">
-                <form:label cssClass="control-label" path="id">
-                    Id:
-                </form:label>
-                <div class="controls">
-                    <form:input path="id" class="myInput"/>
-                    <form:errors path="id" cssStyle="color: red;"/>
+    <div class="row">
+        <form:form method="post" action="/editMovie" commandName="movie" class="form-horizontal well well-large">
+            <fieldset>
+                <div id="legend">
+                    <legend class="">Movie edit page</legend>
                 </div>
-            </div>
-
-            <customTags:movieTag/>
-
-            <div class="control-group">
-                <div class="controls">
-                    <button class="btn btn-success">Edit movie</button>
+                <div class="span3">
+                    <img id="image1" src="${movie.picture}"
+                         class="img-rounded"/>
                 </div>
-            </div>
-        </fieldset>
-    </form:form>
+                <div class="span8">
+                    <div class="control-group" hidden="true">
+                        <form:label cssClass="control-label" path="id">
+                            Id:
+                        </form:label>
+                        <div class="controls">
+                            <form:input path="id" class="myInput"/>
+                            <form:errors path="id" cssStyle="color: red;"/>
+                        </div>
+                    </div>
+
+                    <customTags:movieTag/>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <button class="btn btn-success">Edit movie</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form:form>
+    </div>
 </div>
 </body>
 </html>

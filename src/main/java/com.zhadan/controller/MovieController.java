@@ -92,6 +92,7 @@ public class MovieController {
             movieJSON.put("russianName", movie.getRussianName());
             movieJSON.put("slogan", movie.getSlogan());
             movieJSON.put("year", movie.getYear());
+            movieJSON.put("picture", movie.getPicture());
             userArray.put(movieJSON);
         }
         return userArray.toString();

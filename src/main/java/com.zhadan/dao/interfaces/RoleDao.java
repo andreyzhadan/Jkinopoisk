@@ -15,6 +15,4 @@ public interface RoleDao {
     public static final String INSERT_SQL = "insert into userRole (userId,roleName) values (?,?)";
 
     public void create(Role role) throws IllegalArgumentException, DAOException;
-
-    public void setDataSource(DataSource dataSource);
 }

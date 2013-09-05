@@ -31,7 +31,7 @@ import static org.hamcrest.core.IsNull.nullValue;
 public class MovieDaoJdbcTest {
     private static final String url = "jdbc:h2:jkinopoisk";
     private static final Logger logger = getLogger(MovieDaoJdbcTest.class.getSimpleName());
-    private static MovieDao movieDao;
+    private static MovieDaoJdbcImpl movieDao;
     private static BasicDataSource dataSource;
 
     @BeforeClass

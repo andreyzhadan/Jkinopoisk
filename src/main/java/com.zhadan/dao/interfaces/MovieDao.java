@@ -16,6 +16,4 @@ public interface MovieDao extends BasicDao<Movie> {
     public static final String INSERT_SQL = "insert into movie (name,russianName,rating,slogan,year,country) values (?,?,?,?,?,?)";
     public static final String UPDATE_SQL = "update movie set name=?,russianName=?,rating=?,slogan=?,year=?,country=? where id=?";
     public static final String DELETE_SQL = "delete from movie where id=?";
-
-    public void setDataSource(DataSource dataSource);
 }

@@ -1,10 +1,7 @@
 package com.zhadan.bean;
 
-import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Collection;
 
 /**
  * Created by azhadan on 7/30/13.

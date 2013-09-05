@@ -90,6 +90,7 @@ public class ActorController {
             actorJSON.put("lastName", actor.getLastName());
             actorJSON.put("birthday", actor.getBirthday());
             actorJSON.put("country", actor.getCountry());
+            actorJSON.put("picture", actor.getPicture());
             userArray.put(actorJSON);
         }
         return userArray.toString();

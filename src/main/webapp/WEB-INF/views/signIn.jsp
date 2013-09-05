@@ -40,14 +40,13 @@
                         <input type="password" id="password" name="j_password" placeholder="" class="myInput">
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label inline" for="remember_me">Remember me</label>
+                    <%--<div class="control-group">--%>
+                    <%--<label class="control-label inline" for="remember_me">Remember me</label>--%>
 
-                    <div class="controls">
-                        <input id="remember_me" name="_spring_security_remember_me" type="checkbox"/>
-                    </div>
-                </div>
-
+                    <%--<div class="controls">--%>
+                    <%--<input id="remember_me" name="_spring_security_remember_me" type="checkbox"/>--%>
+                    <%--</div>--%>
+                    <%--</div>--%>
 
                 <div class="control-group">
                     <c:if test="${error}">

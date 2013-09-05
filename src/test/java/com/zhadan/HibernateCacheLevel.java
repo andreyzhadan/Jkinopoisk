@@ -21,12 +21,12 @@ public class HibernateCacheLevel {
         Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
 
-        User user = (User) session.get(User.class, 1L);
+        User user = (User) session.get(User.class, 1);
         long t0 = System.currentTimeMillis();
         for (int i = 0; i < 1000000; i++) {
-            user = (User) session.get(User.class, 1L);
+            user = (User) session.get(User.class, 1);
         }
-        System.out.println(System.currentTimeMillis() - t0);
+        System.out.println("Time " + (System.currentTimeMillis() - t0));
         tx.commit();
         session.close();
     }
@@ -37,12 +37,12 @@ public class HibernateCacheLevel {
         Session session = factory.openSession();
 
         long t0 = System.currentTimeMillis();
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 100; i++) {
             Transaction tx = session.beginTransaction();
-            User user = (User) session.get(User.class, 1L);
+            User user = (User) session.get(User.class, 1);
             tx.commit();
         }
-        System.out.println(System.currentTimeMillis() - t0);
+        System.out.println("Time " + (System.currentTimeMillis() - t0));
         session.close();
     }
 }

@@ -1,9 +1,6 @@
 package com.zhadan.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
@@ -27,6 +24,10 @@ public class Movie implements Serializable {
     private String russianName;
     private int year;
     private String picture;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "MOVIE_ACTOR",
+            joinColumns = {@JoinColumn(name = "MOVIE_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "ACTOR_ID")})
     private List<Actor> actors;
 
     public Movie(String name, String russianName, float rating, String slogan, int year, String country) {
@@ -36,6 +37,16 @@ public class Movie implements Serializable {
         this.rating = rating;
         this.russianName = russianName;
         this.year = year;
+    }
+
+    public Movie(String name, String russianName, float rating, String slogan, int year, String country, List<Actor> actors) {
+        this.country = country;
+        this.name = name;
+        this.slogan = slogan;
+        this.rating = rating;
+        this.russianName = russianName;
+        this.year = year;
+        this.actors = actors;
     }
 
     public Movie() {
@@ -102,12 +113,12 @@ public class Movie implements Serializable {
         return builder.toString();
     }
 
-    public int getId() {
-        return id;
+    public int getYear() {
+        return year;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setYear(int year) {
+        this.year = year;
     }
 
     public String getName() {
@@ -118,11 +129,11 @@ public class Movie implements Serializable {
         this.name = name;
     }
 
-    public int getYear() {
-        return year;
+    public int getId() {
+        return id;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setId(int id) {
+        this.id = id;
     }
 }

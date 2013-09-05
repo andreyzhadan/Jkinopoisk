@@ -21,16 +21,26 @@ public class Actor implements Serializable {
     private String firstName;
     private String lastName;
     private String picture;
+    @ManyToMany(mappedBy = "actors")
     private List<Movie> movies;
 
     public Actor() {
     }
 
     public Actor(String firstName, String lastName, int birthday, String country) {
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.firstName = firstName;
+        this.country = country;
+    }
+
+    public Actor(String country, int birthday, String firstName, String lastName, String picture, List<Movie> movies) {
         this.country = country;
         this.birthday = birthday;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.picture = picture;
+        this.movies = movies;
     }
 
     public String getPicture() {
@@ -70,20 +80,12 @@ public class Actor implements Serializable {
         return builder.toString();
     }
 
-    public int getId() {
-        return id;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(int birthday) {
-        this.birthday = birthday;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getFirstName() {
@@ -94,11 +96,19 @@ public class Actor implements Serializable {
         this.firstName = firstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public int getBirthday() {
+        return birthday;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setBirthday(int birthday) {
+        this.birthday = birthday;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

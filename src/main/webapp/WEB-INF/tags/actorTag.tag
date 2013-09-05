@@ -35,3 +35,12 @@
         <form:errors path="country" cssStyle="color: red;"/>
     </div>
 </div>
+<div class="control-group">
+    <form:label cssClass="control-label" path="picture">
+        Picture url:
+    </form:label>
+    <div class="controls">
+        <form:input path="picture" class="myInput"/>
+        <form:errors path="picture" cssStyle="color: red;"/>
+    </div>
+</div>

@@ -12,36 +12,43 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Add actor page</title>
+    <title>Edit actor page</title>
 </head>
 
 <body>
 <div class="container">
     <%@include file="header.jsp" %>
-    <form:form method="post" action="/editActor" commandName="actor" class="form-horizontal well well-large">
-        <fieldset>
-            <div id="legend">
-                <legend class="">Actor edit page</legend>
-            </div>
-            <div class="control-group" hidden="true">
-                <form:label cssClass="control-label" path="id">
-                    Id:
-                </form:label>
-                <div class="controls">
-                    <form:input path="id" class="myInput"/>
-                    <form:errors path="id" cssStyle="color: red;"/>
+    <div class="row">
+        <form:form method="post" action="/editActor" commandName="actor" class="form-horizontal well well-large">
+            <fieldset>
+                <div id="legend">
+                    <legend class="">Actor edit page</legend>
                 </div>
-            </div>
-
-            <customTags:actorTag/>
-
-            <div class="control-group">
-                <div class="controls">
-                    <button class="btn btn-success">Edit actor</button>
+                <div class="span3">
+                    <img src="${actor.picture}" class="img-rounded" alt="" id="image1"/>
                 </div>
-            </div>
-        </fieldset>
-    </form:form>
+                <div class="span8">
+                    <div class="control-group" hidden="true">
+                        <form:label cssClass="control-label" path="id">
+                            Id:
+                        </form:label>
+                        <div class="controls">
+                            <form:input path="id" class="myInput"/>
+                            <form:errors path="id" cssStyle="color: red;"/>
+                        </div>
+                    </div>
+
+                    <customTags:actorTag/>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <button class="btn btn-success">Edit actor</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form:form>
+    </div>
 </div>
 </body>
 </html>

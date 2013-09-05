@@ -54,6 +54,7 @@ public class ActorDaoJdbcImpl implements ActorDao {
                 actor.setFirstName(rs.getString("firstName"));
                 actor.setLastName(rs.getString("lastName"));
                 actor.setBirthday(rs.getInt("birthday"));
+                actor.setPicture(rs.getString("picture"));
                 logger.debug("You find actor " + actor);
             }
         } catch (Exception e) {
@@ -81,6 +82,7 @@ public class ActorDaoJdbcImpl implements ActorDao {
                 actor.setFirstName(rs.getString("firstName"));
                 actor.setLastName(rs.getString("lastName"));
                 actor.setBirthday(rs.getInt("birthday"));
+                actor.setPicture(rs.getString("picture"));
                 actors.add(actor);
             }
             logger.debug(Arrays.asList(actors));
@@ -104,6 +106,7 @@ public class ActorDaoJdbcImpl implements ActorDao {
             ps.setString(2, entity.getLastName());
             ps.setInt(3, entity.getBirthday());
             ps.setString(4, entity.getCountry());
+            ps.setString(5, entity.getPicture());
             int affectedRows = ps.executeUpdate();
             logger.debug("Inserted " + affectedRows + " entity with values " + entity);
         } catch (Exception e) {
@@ -126,6 +129,7 @@ public class ActorDaoJdbcImpl implements ActorDao {
             ps.setInt(3, entity.getBirthday());
             ps.setString(4, entity.getCountry());
             ps.setInt(5, entity.getId());
+            ps.setString(6, entity.getPicture());
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 0) {
                 throw new DAOException("Updating actor failed, no rows affected.");
@@ -158,7 +162,6 @@ public class ActorDaoJdbcImpl implements ActorDao {
         }
     }
 
-    @Override
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }

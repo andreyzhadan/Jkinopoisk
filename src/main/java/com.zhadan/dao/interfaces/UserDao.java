@@ -17,6 +17,4 @@ public interface UserDao {
     public User findByLogin(String userName);
 
     public User validateUser(String userName, String password);
-
-    public void setDataSource(DataSource dataSource);
 }

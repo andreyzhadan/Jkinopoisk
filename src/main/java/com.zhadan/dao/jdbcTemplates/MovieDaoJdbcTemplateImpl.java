@@ -72,7 +72,6 @@ public class MovieDaoJdbcTemplateImpl implements MovieDao {
         jdbc.update(DELETE_SQL, entity.getId());
     }
 
-    @Override
     public void setDataSource(DataSource dataSource) {
         this.jdbc = new JdbcTemplate(dataSource);
     }

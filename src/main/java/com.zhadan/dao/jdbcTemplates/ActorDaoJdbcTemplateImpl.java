@@ -55,12 +55,12 @@ public class ActorDaoJdbcTemplateImpl implements ActorDao {
 
     @Override
     public void create(Actor entity) throws IllegalArgumentException, DAOException {
-        jdbc.update(INSERT_SQL, new Object[]{entity.getFirstName(), entity.getLastName(), entity.getBirthday(), entity.getCountry()});
+        jdbc.update(INSERT_SQL, new Object[]{entity.getFirstName(), entity.getLastName(), entity.getBirthday(), entity.getCountry(), entity.getPicture()});
     }
 
     @Override
     public void update(Actor entity) throws IllegalArgumentException, DAOException {
-        jdbc.update(UPDATE_SQL, entity.getFirstName(), entity.getLastName(), entity.getBirthday(), entity.getCountry(), entity.getId());
+        jdbc.update(UPDATE_SQL, entity.getFirstName(), entity.getLastName(), entity.getBirthday(), entity.getCountry(), entity.getPicture(), entity.getId());
     }
 
     @Override
@@ -68,7 +68,6 @@ public class ActorDaoJdbcTemplateImpl implements ActorDao {
         jdbc.update(DELETE_SQL, entity.getId());
     }
 
-    @Override
     public void setDataSource(DataSource dataSource) {
         this.jdbc = new JdbcTemplate(dataSource);
     }

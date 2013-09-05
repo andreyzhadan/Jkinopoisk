@@ -2,45 +2,50 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jee="http://www.springframework.org/schema/jee"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
     <context:component-scan base-package="com.zhadan.dao"/>
     <jee:jndi-lookup id="dataSource"
                      jndi-name="jdbc/jkinopoisk"
                      expected-type="javax.sql.DataSource"/>
 
-    <!--<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">-->
-    <!--<property name="dataSource">-->
-    <!--<ref bean="dataSource"/>-->
-    <!--</property>-->
-    <!--<property name="hibernateProperties">-->
-    <!--<props>-->
-    <!--<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>-->
-    <!--<prop key="hibernate.show_sql">true</prop>-->
-    <!--</props>-->
-    <!--</property>-->
-    <!--<property name="annotatedClasses">-->
-    <!--<list>-->
-    <!--<value>com.zhadan.bean.User</value>-->
-    <!--<value>com.zhadan.bean.Role</value>-->
-    <!--</list>-->
-    <!--</property>-->
-    <!--</bean>-->
+    <tx:annotation-driven/>
 
-    <!--<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">-->
-    <!--<property name="sessionFactory" ref="sessionFactory"/>-->
-    <!--</bean>-->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource">
+            <ref bean="dataSource"/>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.zhadan.bean.Actor</value>
+                <value>com.zhadan.bean.Movie</value>
+                <value>com.zhadan.bean.Role</value>
+                <value>com.zhadan.bean.User</value>
+            </list>
+        </property>
+    </bean>
 
-    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
     <bean id="springSecurityFilterChain" class="org.springframework.web.filter.DelegatingFilterProxy"/>
 
-    <bean id="actorDao" class="com.zhadan.dao.jdbcTemplates.ActorDaoJdbcTemplateImpl">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-    <bean id="movieDao" class="com.zhadan.dao.jdbcTemplates.MovieDaoJdbcTemplateImpl">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+    <!--AccessDeniedHandler-->
+    <bean id="accessDeniedHandler" class="com.zhadan.handler.JKinopoiskAccessDeniedHandler"/>
+
+    <!--<bean id="actorDao" class="com.zhadan.dao.jdbcTemplates.ActorDaoJdbcTemplateImpl">-->
+    <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
+    <!--<bean id="movieDao" class="com.zhadan.dao.jdbcTemplates.MovieDaoJdbcTemplateImpl">-->
+    <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
     <bean id="userDao" class="com.zhadan.dao.jdbcTemplates.UserDaoJdbcTemplateImpl">
         <property name="dataSource" ref="dataSource"/>
     </bean>
@@ -58,11 +63,6 @@
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 
-    <!--AccessDeniedHandler-->
-    <bean id="accessDeniedHandler" class="com.zhadan.handler.JKinopoiskAccessDeniedHandler">
-        <property name="accessDeniedUrl" value="403"/>
-    </bean>
-
     <!--Internalization-->
     <!--<bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">-->
     <!--<property name="paramName" value="lang"/>-->
@@ -77,9 +77,8 @@
     <!--</bean>-->
 
     <!--HibernateDAO-->
-    <!--<bean id="userDao" class="com.zhadan.dao.hibernate.UserDaoHibernateImpl">-->
-    <!--<property name="sessionFactory" ref="sessionFactory"/>-->
-    <!--</bean>-->
+    <bean id="movieDao" class="com.zhadan.dao.hibernate.MovieDaoHibernateImpl"/>
+    <bean id="actorDao" class="com.zhadan.dao.hibernate.ActorDaoHibernateImpl"/>
 
     <!--Basic jdbcDao-->
     <!--<bean id="actorDao" class="com.zhadan.dao.jdbc.ActorDaoJdbcImpl"/>-->

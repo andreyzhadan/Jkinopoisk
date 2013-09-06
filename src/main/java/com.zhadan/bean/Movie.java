@@ -3,6 +3,7 @@ package com.zhadan.bean;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +13,7 @@ import java.util.List;
  * Time: 22:35
  */
 @Entity
+@Table(name = "movie")
 public class Movie implements Serializable {
     private static final long serialVersionUID = 6010503502743285804L;
     @Id
@@ -24,11 +26,11 @@ public class Movie implements Serializable {
     private String russianName;
     private int year;
     private String picture;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinTable(name = "MOVIE_ACTOR",
             joinColumns = {@JoinColumn(name = "MOVIE_ID")},
             inverseJoinColumns = {@JoinColumn(name = "ACTOR_ID")})
-    private List<Actor> actors;
+    private List<Actor> actors = new ArrayList<Actor>();
 
     public Movie(String name, String russianName, float rating, String slogan, int year, String country) {
         this.country = country;
@@ -113,12 +115,12 @@ public class Movie implements Serializable {
         return builder.toString();
     }
 
-    public int getYear() {
-        return year;
+    public int getId() {
+        return id;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -129,11 +131,11 @@ public class Movie implements Serializable {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getYear() {
+        return year;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setYear(int year) {
+        this.year = year;
     }
 }

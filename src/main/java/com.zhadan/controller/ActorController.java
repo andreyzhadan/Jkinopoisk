@@ -1,13 +1,13 @@
 package com.zhadan.controller;
 
 import com.zhadan.bean.Actor;
+import com.zhadan.bean.Movie;
 import com.zhadan.dao.interfaces.ActorDao;
 import com.zhadan.validation.ActorValidator;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +38,7 @@ public class ActorController {
     @RequestMapping(value = "/addActor", method = RequestMethod.GET)
     public String addActor(Model model) {
         model.addAttribute("actor", new Actor());
-        return "actorAdd";
+        return "/actorAdd";
     }
 
     @RequestMapping(value = "/addActor", method = RequestMethod.POST)

@@ -38,6 +38,7 @@ public class MovieDaoHibernateImpl implements MovieDao {
         movieToUpdate.setCountry(entity.getCountry());
         movieToUpdate.setRating(entity.getRating());
         movieToUpdate.setPicture(entity.getPicture());
+        movieToUpdate.setActors(entity.getActors());
         getCurrentSession().update(movieToUpdate);
     }
 

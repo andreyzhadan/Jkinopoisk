@@ -46,7 +46,14 @@ public class MovieDaoJdbcTest {
     @Before
     public void setUp() throws Exception {
         logger.debug("SetUp method in movieDaoTest");
-        String movieCreateScript = "CREATE TABLE movie ( id int(11) NOT NULL AUTO_INCREMENT,  name varchar(45) DEFAULT NULL,russianName varchar(45) DEFAULT NULL,  year int(11) DEFAULT NULL,  country varchar(45) DEFAULT NULL,rating float DEFAULT NULL,  slogan varchar(100) DEFAULT NULL,  picture varchar(100) DEFAULT NULL,PRIMARY KEY (id)) ENGINE=InnoDB AUTO_INCREMENT=13";
+        String movieCreateScript = "CREATE TABLE movie ( id int(11) NOT NULL AUTO_INCREMENT,  " +
+                "name varchar(45) DEFAULT NULL," +
+                "russianName varchar(45) DEFAULT NULL,  " +
+                "year int(11) DEFAULT NULL,  " +
+                "country varchar(45) DEFAULT NULL," +
+                "rating float DEFAULT NULL,  " +
+                "slogan varchar(100) DEFAULT NULL,  " +
+                "picture varchar(100) DEFAULT NULL,PRIMARY KEY (id)) ENGINE=InnoDB AUTO_INCREMENT=13";
         recreateTable(dataSource, movieCreateScript, "movie");
         String movieInsertScript = "INSERT INTO movie(name,russianName,year,country,rating,slogan,picture)" +
                 "VALUES(" + "'Lock, Stock and Two Smoking Barrels',\n" +

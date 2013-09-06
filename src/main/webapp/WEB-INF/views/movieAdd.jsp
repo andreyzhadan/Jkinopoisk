@@ -26,6 +26,7 @@
 
             <customTags:movieTag/>
 
+
             <div class="control-group">
                 <div class="controls">
                     <button class="btn btn-success">Add movie</button>

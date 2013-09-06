@@ -1,7 +1,10 @@
 package com.zhadan.controller;
 
+import com.zhadan.bean.Actor;
 import com.zhadan.bean.Movie;
+import com.zhadan.dao.interfaces.ActorDao;
 import com.zhadan.dao.interfaces.MovieDao;
+import com.zhadan.editor.ActorEditor;
 import com.zhadan.validation.MovieValidator;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,21 +28,26 @@ import javax.validation.Valid;
  */
 @Controller
 public class MovieController {
-
     @Autowired
     private MovieDao movieDao;
     @Autowired
+    private ActorDao actorDao;
+    @Autowired
     private MovieValidator movieValidator;
+    @Autowired
+    private ActorEditor actorEditor;
 
     @InitBinder
     private void initBinder(WebDataBinder binder) {
         binder.setValidator(movieValidator);
+        binder.registerCustomEditor(Actor.class, actorEditor);
     }
 
     @RequestMapping(value = "/addMovie", method = RequestMethod.GET)
     public String addMovie(Model model) {
         model.addAttribute("movie", new Movie());
-        return "movieAdd";
+        model.addAttribute("availableActors", actorDao.list());
+        return "/movieAdd";
     }
 
     @RequestMapping(value = "/addMovie", method = RequestMethod.POST)
@@ -61,6 +69,7 @@ public class MovieController {
     public String editMovie(Model model, @PathVariable("movieId") Integer movieId) {
         Movie movie = movieDao.find(movieId);
         model.addAttribute("movie", movie);
+        model.addAttribute("availableActors", actorDao.list());
         return "/movieEdit";
     }
 

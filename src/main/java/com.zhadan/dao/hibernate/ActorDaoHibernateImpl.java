@@ -1,9 +1,7 @@
 package com.zhadan.dao.hibernate;
 
 import com.zhadan.bean.Actor;
-import com.zhadan.bean.Movie;
 import com.zhadan.dao.interfaces.ActorDao;
-import com.zhadan.dao.interfaces.MovieDao;
 import com.zhadan.exceptions.DAOException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -60,6 +58,4 @@ public class ActorDaoHibernateImpl implements ActorDao {
     protected final Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
-
-
 }

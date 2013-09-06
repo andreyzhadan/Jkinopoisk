@@ -11,6 +11,7 @@ import java.util.List;
  * Time: 22:38
  */
 @Entity
+@Table(name = "actor")
 public class Actor implements Serializable {
     private static final long serialVersionUID = 114900396648141282L;
     @Id
@@ -21,7 +22,7 @@ public class Actor implements Serializable {
     private String firstName;
     private String lastName;
     private String picture;
-    @ManyToMany(mappedBy = "actors")
+    @ManyToMany(mappedBy = "actors", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     private List<Movie> movies;
 
     public Actor() {
@@ -110,5 +111,9 @@ public class Actor implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getFullName() {
+        return getFirstName() + " " + getLastName();
     }
 }

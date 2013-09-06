@@ -62,3 +62,14 @@
         <form:errors path="picture" cssStyle="color: red;"/>
     </div>
 </div>
+<div class="control-group">
+    <form:label cssClass="control-label" path="actors">
+        List of actors:
+    </form:label>
+    <div class="controls">
+        <form:select path="actors" class="myInput" cssStyle="height: 200px !important;">
+            <form:options items="${availableActors}" itemLabel="fullName" itemValue="id"/>
+        </form:select>
+        <form:errors path="actors" cssStyle="color: red;"/>
+    </div>
+</div>

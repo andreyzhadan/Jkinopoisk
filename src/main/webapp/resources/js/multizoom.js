@@ -233,8 +233,8 @@ jQuery.noConflict();
             setting.largeimage = setting.largeimage || $img.get(0).src;
             $magnifier=$('<div class="magnifyarea" style="position:absolute;z-index:'+basezindex+';width:'+setting.magnifiersize[0]+'px;height:'+setting.magnifiersize[1]+'px;left:-10000px;top:-10000px;visibility:hidden;overflow:hidden;border:1px solid black;" />')
                 .append('<div style="position:relative;left:0;top:0;z-index:'+basezindex+';" />')
-                .appendTo(document.body) //create magnifier container
-            //following lines - create featured image zoomer divs, and absolutely positioned them for placement over the thumbnail and each other:
+                .appendTo(document.body) //insert magnifier container
+            //following lines - insert featured image zoomer divs, and absolutely positioned them for placement over the thumbnail and each other:
             if(setting.cursorshade){
                 $cursorshade = $('<div class="cursorshade" style="visibility:hidden;position:absolute;left:0;top:0;z-index:'+basezindex+';" />')
                     .css({border: setting.cursorshadeborder, opacity: setting.cursorshadeopacity, backgroundColor: setting.cursorshadecolor})
@@ -244,7 +244,7 @@ jQuery.noConflict();
             }
             $statusdiv = $('<div class="zoomstatus preloadevt" style="position:absolute;visibility:hidden;left:0;top:0;z-index:'+basezindex+';" />')
                 .html('<img src="'+this.loadinggif+'" />')
-                .appendTo(document.body); //create DIV to show "loading" gif/ "Current Zoom" info
+                .appendTo(document.body); //insert DIV to show "loading" gif/ "Current Zoom" info
             $tracker = $('<div class="zoomtracker" style="cursor:progress;position:absolute;z-index:'+basezindex+';left:'+o.left+'px;top:'+o.top+'px;height:'+h+'px;width:'+w+'px;" />')
                 .css({backgroundImage: (this.isie? 'url(cannotbe)' : 'none')})
                 .appendTo(document.body);

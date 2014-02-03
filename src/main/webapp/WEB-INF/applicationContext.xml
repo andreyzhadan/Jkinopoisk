@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jee="http://www.springframework.org/schema/jee"
-       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
     <context:component-scan base-package="com.zhadan.dao"/>
     <context:component-scan base-package="com.zhadan.editor"/>
@@ -13,9 +13,7 @@
     <tx:annotation-driven/>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource">
-            <ref bean="dataSource"/>
-        </property>
+        <property name="dataSource" ref="dataSource"/>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
@@ -25,6 +23,7 @@
         </property>
         <property name="annotatedClasses">
             <list>
+                <value>com.zhadan.bean.Recommendation</value>
                 <value>com.zhadan.bean.Actor</value>
                 <value>com.zhadan.bean.Movie</value>
                 <value>com.zhadan.bean.Role</value>
@@ -68,6 +67,7 @@
     <!--HibernateDAO-->
     <bean id="movieDao" class="com.zhadan.dao.hibernate.MovieDaoHibernateImpl"/>
     <bean id="actorDao" class="com.zhadan.dao.hibernate.ActorDaoHibernateImpl"/>
+    <bean id="recommendationDao" class="com.zhadan.dao.hibernate.RecommendationDaoHibernateImpl"/>
 
     <!--Basic jdbcDao-->
     <!--<bean id="actorDao" class="com.zhadan.dao.jdbc.ActorDaoJdbcImpl"/>-->

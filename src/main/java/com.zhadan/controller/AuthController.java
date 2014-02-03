@@ -66,7 +66,7 @@ public class AuthController {
             return "/signUp";
         }
         userDao.create(user);
-        roleDao.create(new Role(userDao.findByLogin(user.getUserName()).getId(), "ROLE_USER"));
+        roleDao.insert(new Role(userDao.findByLogin(user.getUserName()).getId(), "ROLE_USER"));
         return "redirect:/home";
     }
 

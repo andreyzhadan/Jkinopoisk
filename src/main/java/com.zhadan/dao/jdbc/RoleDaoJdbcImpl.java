@@ -2,7 +2,6 @@ package com.zhadan.dao.jdbc;
 
 import com.zhadan.bean.Role;
 import com.zhadan.dao.interfaces.RoleDao;
-import com.zhadan.dao.interfaces.UserDao;
 import com.zhadan.exceptions.DAOException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import static com.zhadan.utils.DatabaseUtils.close;
 import static org.apache.log4j.Logger.getLogger;
@@ -29,10 +27,9 @@ public class RoleDaoJdbcImpl implements RoleDao {
     private DataSource dataSource;
 
     @Override
-    public void create(Role role) throws IllegalArgumentException, DAOException {
+    public void insert(Role role) throws IllegalArgumentException, DAOException {
         Connection connection = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
             ps = connection.prepareStatement(INSERT_SQL);
@@ -42,7 +39,7 @@ public class RoleDaoJdbcImpl implements RoleDao {
         } catch (Exception e) {
             throw new DAOException(e);
         } finally {
-            close(connection, ps, rs);
+            close(connection, ps);
         }
     }
 

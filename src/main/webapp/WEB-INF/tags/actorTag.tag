@@ -44,3 +44,14 @@
         <form:errors path="picture" cssStyle="color: red;"/>
     </div>
 </div>
+<div class="control-group">
+    <form:label cssClass="control-label" path="movies">
+        List of movies:
+    </form:label>
+    <div class="controls">
+        <form:select path="movies" class="chosen" cssStyle="width: 210px" multiple="true">
+            <form:options items="${allMovies}" itemLabel="russianName" itemValue="id"/>
+        </form:select>
+        <form:errors path="movies" cssStyle="color: red;"/>
+    </div>
+</div>

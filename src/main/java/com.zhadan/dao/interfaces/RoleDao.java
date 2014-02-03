@@ -3,8 +3,6 @@ package com.zhadan.dao.interfaces;
 import com.zhadan.bean.Role;
 import com.zhadan.exceptions.DAOException;
 
-import javax.sql.DataSource;
-
 /**
  * Created with IntelliJ IDEA.
  * User: azhadan
@@ -14,5 +12,5 @@ import javax.sql.DataSource;
 public interface RoleDao {
     public static final String INSERT_SQL = "insert into userRole (userId,roleName) values (?,?)";
 
-    public void create(Role role) throws IllegalArgumentException, DAOException;
+    public void insert(Role role) throws IllegalArgumentException, DAOException;
 }

@@ -67,8 +67,8 @@
         List of actors:
     </form:label>
     <div class="controls">
-        <form:select path="actors" class="myInput" cssStyle="height: 200px !important;">
-            <form:options items="${availableActors}" itemLabel="fullName" itemValue="id"/>
+        <form:select path="actors" class="chosen" cssStyle="width: 210px" multiple="true">
+            <form:options items="${allActors}" itemLabel="fullName" itemValue="id"/>
         </form:select>
         <form:errors path="actors" cssStyle="color: red;"/>
     </div>

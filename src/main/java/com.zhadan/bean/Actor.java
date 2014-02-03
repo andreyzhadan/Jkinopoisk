@@ -2,6 +2,7 @@ package com.zhadan.bean;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,10 +23,18 @@ public class Actor implements Serializable {
     private String firstName;
     private String lastName;
     private String picture;
-    @ManyToMany(mappedBy = "actors", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
-    private List<Movie> movies;
+    @ManyToMany(mappedBy = "actors", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    private List<Movie> movies = new ArrayList<Movie>();
 
     public Actor() {
+    }
+
+    public Actor(int id, String firstName, String lastName, int birthday, String country) {
+        this.id = id;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.firstName = firstName;
+        this.country = country;
     }
 
     public Actor(String firstName, String lastName, int birthday, String country) {
@@ -70,31 +79,15 @@ public class Actor implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("id = ");
-        builder.append(this.getId());
-        builder.append(" name = ");
-        builder.append(this.getFirstName());
-        builder.append(this.getLastName());
-        builder.append(" birthday = ");
-        builder.append(this.getBirthday());
-        return builder.toString();
+        return "id = " + this.getId() + " fullName = " + this.getFullName() + " birthday = " + this.getBirthday();
     }
 
-    public String getLastName() {
-        return lastName;
+    public int getId() {
+        return id;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getBirthday() {
@@ -105,12 +98,20 @@ public class Actor implements Serializable {
         this.birthday = birthday;
     }
 
-    public int getId() {
-        return id;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getFullName() {

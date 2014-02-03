@@ -32,8 +32,8 @@ public class RoleDaoJdbcTemplateImpl implements RoleDao {
     private JdbcTemplate jdbc;
 
     @Override
-    public void create(Role role) throws IllegalArgumentException, DAOException {
-        jdbc.update(INSERT_SQL, new Object[]{role.getUserId(), role.getRoleName()});
+    public void insert(Role role) throws IllegalArgumentException, DAOException {
+        jdbc.update(INSERT_SQL, role.getUserId(), role.getRoleName());
     }
 
     public void setDataSource(DataSource dataSource) {

@@ -1,17 +1,13 @@
 package com.zhadan.dao.jdbcTemplates;
 
-import com.zhadan.bean.Actor;
 import com.zhadan.bean.Movie;
 import com.zhadan.dao.interfaces.MovieDao;
 import com.zhadan.exceptions.DAOException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -54,12 +50,17 @@ public class MovieDaoJdbcTemplateImpl implements MovieDao {
 
     @Override
     public List<Movie> list() throws DAOException {
-        return jdbc.query(SELECT_ALL, new BeanPropertyRowMapper(Movie.class));
+        return jdbc.query(SELECT_ALL, new BeanPropertyRowMapper<Movie>(Movie.class));
     }
 
     @Override
-    public void create(Movie entity) throws IllegalArgumentException, DAOException {
-        jdbc.update(INSERT_SQL, new Object[]{entity.getName(), entity.getRussianName(), entity.getRating(), entity.getSlogan(), entity.getYear(), entity.getCountry()});
+    public List<Movie> list(int offset, int limit) throws DAOException {
+        return null;
+    }
+
+    @Override
+    public void insert(Movie entity) throws IllegalArgumentException, DAOException {
+        jdbc.update(INSERT_SQL, entity.getName(), entity.getRussianName(), entity.getRating(), entity.getSlogan(), entity.getYear(), entity.getCountry());
     }
 
     @Override
@@ -72,8 +73,18 @@ public class MovieDaoJdbcTemplateImpl implements MovieDao {
         jdbc.update(DELETE_SQL, entity.getId());
     }
 
+    @Override
+    public int getSize() {
+        return 0;
+    }
+
     public void setDataSource(DataSource dataSource) {
         this.jdbc = new JdbcTemplate(dataSource);
+    }
+
+    @Override
+    public void batchInsert(List<Movie> movies) throws IllegalArgumentException, DAOException {
+
     }
 
 //    @PostConstruct

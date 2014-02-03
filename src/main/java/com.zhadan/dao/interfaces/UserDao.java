@@ -3,10 +3,11 @@ package com.zhadan.dao.interfaces;
 import com.zhadan.bean.User;
 import com.zhadan.exceptions.DAOException;
 
-import javax.sql.DataSource;
-
 /**
- * Created by azhadan on 8/1/13.
+ * Created with IntelliJ IDEA.
+ * User: azhadan
+ * Date: 8/1/13
+ * Time: 15:52
  */
 public interface UserDao {
     public static final String SELECT_SQL = "select * from users where userName=?";

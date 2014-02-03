@@ -16,7 +16,10 @@ import static com.zhadan.utils.DatabaseUtils.close;
 import static org.apache.log4j.Logger.getLogger;
 
 /**
- * Created by azhadan on 8/1/13.
+ * Created with IntelliJ IDEA.
+ * User: azhadan
+ * Date: 8/1/13
+ * Time: 12:22
  */
 @Repository
 public class UserDaoJdbcImpl implements UserDao {
@@ -32,7 +35,6 @@ public class UserDaoJdbcImpl implements UserDao {
     public void create(User user) throws IllegalArgumentException, DAOException {
         Connection connection = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
             ps = connection.prepareStatement(INSERT_SQL);
@@ -42,7 +44,7 @@ public class UserDaoJdbcImpl implements UserDao {
         } catch (Exception e) {
             throw new DAOException(e);
         } finally {
-            close(connection, ps, rs);
+            close(connection, ps);
         }
     }
 

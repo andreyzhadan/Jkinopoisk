@@ -35,7 +35,7 @@ public class UserDaoJdbcTemplateImpl implements UserDao {
 
     @Override
     public void create(User user) throws IllegalArgumentException, DAOException {
-        jdbc.update(INSERT_SQL, new Object[]{user.getUserName(), user.getPassword()});
+        jdbc.update(INSERT_SQL, user.getUserName(), user.getPassword());
     }
 
     @Override

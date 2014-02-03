@@ -3,7 +3,6 @@ package com.zhadan.dao.interfaces;
 
 import com.zhadan.exceptions.DAOException;
 
-import javax.sql.DataSource;
 import java.util.List;
 
 /**
@@ -29,13 +28,22 @@ public interface BasicDao<T> {
     public T find(Integer id) throws DAOException;
 
     /**
-     * Returns a list of all entities from the database ordered by user ID. The list is never null and
+     * Returns a list of all entities from the database. The list is never null and
      * is empty when the database does not contain any entity.
      *
      * @return A list of all entities from the database ordered by user ID.
      * @throws DAOException If something fails at database level.
      */
     public List<T> list() throws DAOException;
+
+    /**
+     * Returns a list of all entities from the database with offset and limit. The list is never null and
+     * is empty when the database does not contain any entity.
+     *
+     * @return A list of all entities from the database ordered by user ID.
+     * @throws DAOException If something fails at database level.
+     */
+    public List<T> list(int offset, int limit) throws DAOException;
 
     /**
      * Create the given entity in the database. The ID must be null, otherwise it will throw
@@ -45,7 +53,7 @@ public interface BasicDao<T> {
      * @throws IllegalArgumentException If the ID is not null.
      * @throws DAOException             If something fails at database level.
      */
-    public void create(T entity) throws IllegalArgumentException, DAOException;
+    public void insert(T entity) throws IllegalArgumentException, DAOException;
 
     /**
      * Update the given entity in the database. The ID must not be null, otherwise it will throw
@@ -66,4 +74,5 @@ public interface BasicDao<T> {
      */
     public void delete(T entity) throws DAOException;
 
+    public int getSize();
 }

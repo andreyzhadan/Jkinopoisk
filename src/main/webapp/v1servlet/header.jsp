@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: azhadan
@@ -6,8 +7,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
-    <link type="text/css" href="/resources/css/bootstrap.css" rel="stylesheet">
-    <link type="text/css" href="/resources/css/jkinopoisk.css" rel="stylesheet">
+    <link type="text/css" href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link type="text/css" href="<c:url value="/resources/css/jkinopoisk.css"/>" rel="stylesheet">
 </head>
 <div class="navbar">
     <div class="navbar-inner">

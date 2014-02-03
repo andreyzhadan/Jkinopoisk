@@ -38,7 +38,7 @@ public class ActorAddServlet extends SpringInitServlet {
             Integer birthday = Integer.valueOf(req.getParameter("birthday"));
             String country = req.getParameter("country");
             Actor actor = new Actor(firstName, lastName, birthday, country);
-            actorDao.create(actor);
+            actorDao.insert(actor);
             logger.debug("Insert new actor " + actor);
             logger.debug("Send redirect to actors page");
             resp.sendRedirect(ACTORS_PAGE);

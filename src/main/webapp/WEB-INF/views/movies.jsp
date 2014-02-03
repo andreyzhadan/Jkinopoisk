@@ -58,6 +58,27 @@ To change this template use File | Settings | File Templates.
             </c:forEach>
             </tbody>
         </table>
+        <ul class="pager">
+            <c:choose>
+            <c:when test="${sessionScope.param == 'prev'}">
+            <li class="previous disabled">
+                </c:when>
+                <c:otherwise>
+            <li class="previous"></c:otherwise>
+                </c:choose>
+                <a href="<c:url value="/movies/prev"/>">&larr; Prev</a>
+            </li>
+
+            <c:choose>
+            <c:when test="${sessionScope.param == 'next'}">
+            <li class="next disabled">
+                </c:when>
+                <c:otherwise>
+            <li class="next"></c:otherwise>
+                </c:choose>
+                <a href="<c:url value="/movies/next"/>">Next &rarr;</a>
+            </li>
+        </ul>
     </c:if>
 </div>
 

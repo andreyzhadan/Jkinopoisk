@@ -3,11 +3,9 @@ package com.zhadan.dao.jdbcTemplates;
 import com.zhadan.bean.Actor;
 import com.zhadan.dao.interfaces.ActorDao;
 import com.zhadan.exceptions.DAOException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -50,12 +48,17 @@ public class ActorDaoJdbcTemplateImpl implements ActorDao {
 
     @Override
     public List<Actor> list() throws DAOException {
-        return jdbc.query(SELECT_ALL, new BeanPropertyRowMapper(Actor.class));
+        return jdbc.query(SELECT_ALL, new BeanPropertyRowMapper<Actor>(Actor.class));
     }
 
     @Override
-    public void create(Actor entity) throws IllegalArgumentException, DAOException {
-        jdbc.update(INSERT_SQL, new Object[]{entity.getFirstName(), entity.getLastName(), entity.getBirthday(), entity.getCountry(), entity.getPicture()});
+    public List<Actor> list(int offset, int limit) throws DAOException {
+        return null;
+    }
+
+    @Override
+    public void insert(Actor entity) throws IllegalArgumentException, DAOException {
+        jdbc.update(INSERT_SQL, entity.getFirstName(), entity.getLastName(), entity.getBirthday(), entity.getCountry(), entity.getPicture());
     }
 
     @Override
@@ -70,5 +73,10 @@ public class ActorDaoJdbcTemplateImpl implements ActorDao {
 
     public void setDataSource(DataSource dataSource) {
         this.jdbc = new JdbcTemplate(dataSource);
+    }
+
+    @Override
+    public int getSize() {
+        return 0;
     }
 }

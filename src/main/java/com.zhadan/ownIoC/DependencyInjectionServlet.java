@@ -37,14 +37,15 @@ public class DependencyInjectionServlet extends HttpServlet {
         }
     }
 
-    private AppContext initApplicationContext(String appCtxPath, String appCtxClass) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
-        AppContext appCtx = (AppContext) Class.forName(appCtxClass).newInstance();
-        baseLogger.debug("OK: Create instance of " + appCtxClass + " appCtx= " + appCtx);
+    private String getInitContextParam(String param) throws ServletException {
+        String value = this.getServletContext().getInitParameter(param);
+        baseLogger.debug("load " + param + " -> " + value);
 
-        appCtx.init(appCtxPath);
-        baseLogger.debug("OK: Init instance of " + appCtxClass);
-
-        return appCtx;
+        if (value == null) {
+            baseLogger.error("I need this param " + param);
+            throw new ServletException(param + " init param null");
+        }
+        return value;
     }
 
     private void injectFields(AppContext appCtx) throws Exception {
@@ -70,14 +71,13 @@ public class DependencyInjectionServlet extends HttpServlet {
         field.set(this, bean);
     }
 
-    private String getInitContextParam(String param) throws ServletException {
-        String value = this.getServletContext().getInitParameter(param);
-        baseLogger.debug("load " + param + " -> " + value);
+    private AppContext initApplicationContext(String appCtxPath, String appCtxClass) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+        AppContext appCtx = (AppContext) Class.forName(appCtxClass).newInstance();
+        baseLogger.debug("OK: Create instance of " + appCtxClass + " appCtx= " + appCtx);
 
-        if (value == null) {
-            baseLogger.error("I need this param " + param);
-            throw new ServletException(param + " init param null");
-        }
-        return value;
+        appCtx.init(appCtxPath);
+        baseLogger.debug("OK: Init instance of " + appCtxClass);
+
+        return appCtx;
     }
 }

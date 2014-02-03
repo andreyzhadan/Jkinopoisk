@@ -5,12 +5,12 @@ import com.zhadan.bean.Movie;
 import com.zhadan.dao.interfaces.ActorDao;
 import com.zhadan.dao.interfaces.MovieDao;
 import com.zhadan.editor.ActorEditor;
+import com.zhadan.utils.Converter;
 import com.zhadan.validation.MovieValidator;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
@@ -46,7 +47,7 @@ public class MovieController {
     @RequestMapping(value = "/addMovie", method = RequestMethod.GET)
     public String addMovie(Model model) {
         model.addAttribute("movie", new Movie());
-        model.addAttribute("availableActors", actorDao.list());
+        model.addAttribute("allActors", actorDao.list());
         return "/movieAdd";
     }
 
@@ -55,8 +56,16 @@ public class MovieController {
         if (result.hasErrors()) {
             return "/movieAdd";
         }
-        movieDao.create(movie);
+        movieDao.insert(movie);
         return "redirect:/movies";
+    }
+
+    @RequestMapping(value = "/convertMoviesToMahoutData", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String convertMoviesToMahoutData() {
+        Converter.convertMovies(movieDao);
+        return "All movies has been converted";
     }
 
     @RequestMapping(value = "/deleteMovie/{movieId}", method = RequestMethod.GET)
@@ -66,10 +75,10 @@ public class MovieController {
     }
 
     @RequestMapping(value = "/editMovie/{movieId}", method = RequestMethod.GET)
-    public String editMovie(Model model, @PathVariable("movieId") Integer movieId) {
+    public String editMovie(Model model, @PathVariable("movieId") int movieId) {
         Movie movie = movieDao.find(movieId);
         model.addAttribute("movie", movie);
-        model.addAttribute("availableActors", actorDao.list());
+        model.addAttribute("allActors", actorDao.list());
         return "/movieEdit";
     }
 
@@ -81,11 +90,46 @@ public class MovieController {
         movieDao.update(movie);
         return "redirect:/movies";
     }
+    @RequestMapping(value = "/movies/prev", method = RequestMethod.GET)
+    public String listOfMoviesPrev(HttpServletRequest request) {
+        Integer offset = Integer.parseInt(String.valueOf(request.getSession().getAttribute("offset")));
+        Integer limit = Integer.parseInt(String.valueOf(request.getSession().getAttribute("limit")));
+        int newOffset = offset - limit;
+        if (newOffset <= 0) {
+            newOffset = 0;
+        }
+        return "redirect:/movies?offset=" + newOffset + "&limit=" + limit;
+    }
 
     @RequestMapping(value = "/movies", method = RequestMethod.GET)
-    public String listOfMovies(Model model) {
-        model.addAttribute("movies", movieDao.list());
+    public String listOfMovies(@RequestParam(value = "offset", required = false, defaultValue = "0") int offset,
+                               @RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
+                               @RequestParam(value = "param", required = false, defaultValue = "empty") String param,
+                               Model model, HttpServletRequest request) {
+        request.getSession().setAttribute("offset", String.valueOf(offset));
+        request.getSession().setAttribute("limit", String.valueOf(limit));
+        if (offset == 0) {
+            param = "prev";
+        }
+        request.getSession().setAttribute("param", param);
+        model.addAttribute("movies", movieDao.list(offset, limit));
         return "movies";
+    }
+
+    @RequestMapping(value = "/movies/next", method = RequestMethod.GET)
+    public String listOfMoviesNext(HttpServletRequest request) {
+        Integer offset = Integer.parseInt(String.valueOf(request.getSession().getAttribute("offset")));
+        Integer limit = Integer.parseInt(String.valueOf(request.getSession().getAttribute("limit")));
+        int size = movieDao.getSize();
+        int newOffset = offset + limit;
+        String param = "empty";
+        if (newOffset + limit > size) {
+            param = "next";
+        }
+        if (newOffset > size) {
+            newOffset = offset;
+        }
+        return "redirect:/movies?offset=" + newOffset + "&limit=" + limit + "&param=" + param;
     }
 
     @RequestMapping(value = "/api/movies", method = RequestMethod.GET)

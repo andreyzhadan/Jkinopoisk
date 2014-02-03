@@ -46,7 +46,7 @@ public class MovieAddServlet extends SpringInitServlet {
             Integer year = Integer.valueOf(req.getParameter("year"));
             String slogan = req.getParameter("slogan");
             Movie movie = new Movie(name, russianName, rating, slogan, year, country);
-            movieDao.create(movie);
+            movieDao.insert(movie);
             logger.debug("Insert new movie " + movie);
             logger.debug("Send redirect to movies page");
             resp.sendRedirect(MOVIES_PAGE);

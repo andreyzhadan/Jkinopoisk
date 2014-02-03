@@ -24,7 +24,7 @@ public class JkinopoiskFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         String reqURI = req.getRequestURI();
         if (!reqURI.contains("/v1servlet/signIn") && !reqURI.contains("/v1servlet/signUp") &&
-                !reqURI.contains(".css") && !reqURI.contains("favicon.ico")) {             //create separate filter for static resources?
+                !reqURI.contains(".css") && !reqURI.contains("favicon.ico")) {             //insert separate filter for static resources?
             HttpSession httpSession = req.getSession();
             User userFromSession = (User) httpSession.getAttribute("user");
             if (userFromSession == null) {

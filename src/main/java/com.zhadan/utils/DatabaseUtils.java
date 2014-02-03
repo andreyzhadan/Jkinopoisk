@@ -14,7 +14,10 @@ import org.apache.log4j.Logger;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import static org.apache.log4j.Logger.getLogger;
 
@@ -38,6 +41,17 @@ public final class DatabaseUtils {
      */
     public static void close(Connection connection, Statement statement, ResultSet resultSet) {
         close(resultSet);
+        close(statement);
+        close(connection);
+    }
+
+    /**
+     * Quietly close the Connection, Statement and ResultSet. Any errors will be printed to the logger.
+     *
+     * @param connection The Connection to be closed quietly.
+     * @param statement  The Statement to be closed quietly.
+     */
+    public static void close(Connection connection, Statement statement) {
         close(statement);
         close(connection);
     }

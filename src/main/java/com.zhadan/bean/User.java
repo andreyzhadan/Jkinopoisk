@@ -2,9 +2,14 @@ package com.zhadan.bean;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by azhadan on 7/30/13.
+ * Created with IntelliJ IDEA.
+ * User: azhadan
+ * Date: 7/30/13
+ * Time: 0:11
  */
 @Entity
 @Table(name = "users")
@@ -17,6 +22,8 @@ public class User implements Serializable {
     private String password;
     @Transient
     private String password2;
+    @OneToMany(mappedBy = "user")
+    private List<Recommendation> recommendations = new ArrayList<Recommendation>();
 
     public User() {
 
@@ -25,6 +32,18 @@ public class User implements Serializable {
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;
+    }
+
+    public User(int user_id) {
+        this.id = user_id;
+    }
+
+    public List<Recommendation> getRecommendations() {
+        return recommendations;
+    }
+
+    public void setRecommendations(List<Recommendation> recommendations) {
+        this.recommendations = recommendations;
     }
 
     public String getPassword2() {

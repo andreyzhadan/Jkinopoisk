@@ -5,7 +5,6 @@ import com.zhadan.dao.interfaces.ActorDao;
 import com.zhadan.exceptions.DAOException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -14,10 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.zhadan.utils.DatabaseUtils.close;
+import static java.util.Arrays.asList;
 import static org.apache.log4j.Logger.getLogger;
 
 /**
@@ -85,7 +84,7 @@ public class ActorDaoJdbcImpl implements ActorDao {
                 actor.setPicture(rs.getString("picture"));
                 actors.add(actor);
             }
-            logger.debug(Arrays.asList(actors));
+            logger.debug(asList(actors));
         } catch (Exception e) {
             throw new DAOException(e);
         } finally {
@@ -95,10 +94,14 @@ public class ActorDaoJdbcImpl implements ActorDao {
     }
 
     @Override
-    public void create(Actor entity) throws IllegalArgumentException, DAOException {
+    public List<Actor> list(int offset, int limit) throws DAOException {
+        return null;
+    }
+
+    @Override
+    public void insert(Actor entity) throws IllegalArgumentException, DAOException {
         Connection connection = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
             ps = connection.prepareStatement(INSERT_SQL);
@@ -112,7 +115,7 @@ public class ActorDaoJdbcImpl implements ActorDao {
         } catch (Exception e) {
             throw new DAOException(e);
         } finally {
-            close(connection, ps, rs);
+            close(connection, ps);
         }
     }
 
@@ -120,7 +123,6 @@ public class ActorDaoJdbcImpl implements ActorDao {
     public void update(Actor entity) throws IllegalArgumentException, DAOException {
         Connection connection = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
             ps = connection.prepareStatement(UPDATE_SQL);
@@ -137,7 +139,7 @@ public class ActorDaoJdbcImpl implements ActorDao {
         } catch (Exception e) {
             throw new DAOException(e);
         } finally {
-            close(connection, ps, rs);
+            close(connection, ps);
         }
     }
 
@@ -145,7 +147,6 @@ public class ActorDaoJdbcImpl implements ActorDao {
     public void delete(Actor entity) throws DAOException {
         Connection connection = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
             ps = connection.prepareStatement(DELETE_SQL);
@@ -158,7 +159,7 @@ public class ActorDaoJdbcImpl implements ActorDao {
         } catch (Exception e) {
             throw new DAOException(e);
         } finally {
-            close(connection, ps, rs);
+            close(connection, ps);
         }
     }
 
@@ -166,4 +167,8 @@ public class ActorDaoJdbcImpl implements ActorDao {
         this.dataSource = dataSource;
     }
 
+    @Override
+    public int getSize() {
+        return 0;
+    }
 }

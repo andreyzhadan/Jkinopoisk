@@ -5,7 +5,6 @@ import com.zhadan.dao.interfaces.MovieDao;
 import com.zhadan.exceptions.DAOException;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -14,10 +13,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.zhadan.utils.DatabaseUtils.close;
+import static java.util.Arrays.asList;
 import static org.apache.log4j.Logger.getLogger;
 
 /**
@@ -33,7 +32,7 @@ public class MovieDaoJdbcImpl implements MovieDao {
     private DataSource dataSource;
 
     public MovieDaoJdbcImpl() {
-        //dataSource = createDataSource();
+//        dataSource = createDataSource();
     }
 
     @Override
@@ -87,7 +86,7 @@ public class MovieDaoJdbcImpl implements MovieDao {
                 movie.setCountry(rs.getString("country"));
                 movies.add(movie);
             }
-            logger.debug(Arrays.asList(movies));
+            logger.debug(asList(movies));
         } catch (Exception e) {
             throw new DAOException(e);
         } finally {
@@ -97,10 +96,14 @@ public class MovieDaoJdbcImpl implements MovieDao {
     }
 
     @Override
-    public void create(Movie entity) throws IllegalArgumentException, DAOException {
+    public List<Movie> list(int offset, int limit) throws DAOException {
+        return null;
+    }
+
+    @Override
+    public void insert(Movie entity) throws IllegalArgumentException, DAOException {
         Connection connection = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
             ps = connection.prepareStatement(INSERT_SQL);
@@ -115,7 +118,7 @@ public class MovieDaoJdbcImpl implements MovieDao {
         } catch (Exception e) {
             throw new DAOException(e);
         } finally {
-            close(connection, ps, rs);
+            close(connection, ps);
         }
     }
 
@@ -123,7 +126,6 @@ public class MovieDaoJdbcImpl implements MovieDao {
     public void update(Movie entity) throws IllegalArgumentException, DAOException {
         Connection connection = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
             ps = connection.prepareStatement(UPDATE_SQL);
@@ -141,7 +143,7 @@ public class MovieDaoJdbcImpl implements MovieDao {
         } catch (Exception e) {
             throw new DAOException(e);
         } finally {
-            close(connection, ps, rs);
+            close(connection, ps);
         }
     }
 
@@ -149,7 +151,6 @@ public class MovieDaoJdbcImpl implements MovieDao {
     public void delete(Movie entity) throws DAOException {
         Connection connection = null;
         PreparedStatement ps = null;
-        ResultSet rs = null;
         try {
             connection = dataSource.getConnection();
             ps = connection.prepareStatement(DELETE_SQL);
@@ -162,12 +163,21 @@ public class MovieDaoJdbcImpl implements MovieDao {
         } catch (Exception e) {
             throw new DAOException(e);
         } finally {
-            close(connection, ps, rs);
+            close(connection, ps);
         }
+    }
+
+    @Override
+    public int getSize() {
+        return 0;
     }
 
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
+    @Override
+    public void batchInsert(List<Movie> movies) throws IllegalArgumentException, DAOException {
+
+    }
 }

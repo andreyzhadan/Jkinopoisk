@@ -9,6 +9,8 @@
     <name>Jkinopoisk Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <properties>
+        <project.build.sourceencoding>UTF-8</project.build.sourceencoding>
+        <apache.mahout.version>0.4</apache.mahout.version>
         <spring.version>3.1.4.RELEASE</spring.version>
     </properties>
     <dependencies>
@@ -160,17 +162,30 @@
             <version>20090211</version>
         </dependency>
 
-        <!--&lt;!&ndash; AOP dependency &ndash;&gt;-->
+        <!--Mahout-->
+        <dependency>
+            <groupId>org.apache.mahout</groupId>
+            <artifactId>mahout-core</artifactId>
+            <version>${apache.mahout.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.mahout</groupId>
+            <artifactId>mahout-math</artifactId>
+            <version>${apache.mahout.version}</version>
+        </dependency>
+
         <!--<dependency>-->
-        <!--<groupId>cglib</groupId>-->
-        <!--<artifactId>cglib</artifactId>-->
-        <!--<version>2.2.2</version>-->
+        <!--<groupId>org.apache.mahout</groupId>-->
+        <!--<artifactId>mahout-integration</artifactId>-->
+        <!--<version>${apache.mahout.version}</version>-->
         <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>asm</groupId>-->
-        <!--<artifactId>asm</artifactId>-->
-        <!--<version>3.3.1</version>-->
-        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.apache.mahout</groupId>
+            <artifactId>mahout-utils</artifactId>
+            <version>${apache.mahout.version}</version>
+        </dependency>
 
     </dependencies>
 

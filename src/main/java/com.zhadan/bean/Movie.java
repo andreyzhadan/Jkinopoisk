@@ -1,7 +1,6 @@
 package com.zhadan.bean;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +25,13 @@ public class Movie implements Serializable {
     private String russianName;
     private int year;
     private String picture;
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinTable(name = "MOVIE_ACTOR",
             joinColumns = {@JoinColumn(name = "MOVIE_ID")},
             inverseJoinColumns = {@JoinColumn(name = "ACTOR_ID")})
     private List<Actor> actors = new ArrayList<Actor>();
+    @OneToMany(mappedBy = "movie")
+    private List<Recommendation> recommendations = new ArrayList<Recommendation>();
 
     public Movie(String name, String russianName, float rating, String slogan, int year, String country) {
         this.country = country;
@@ -51,8 +52,26 @@ public class Movie implements Serializable {
         this.actors = actors;
     }
 
+    public Movie(int id, String name, int year) {
+        this.id = id;
+        this.name = name;
+        this.year = year;
+    }
+
     public Movie() {
 
+    }
+
+    public Movie(int movie_id) {
+        this.id = movie_id;
+    }
+
+    public List getRecommendations() {
+        return recommendations;
+    }
+
+    public void setRecommendations(List<Recommendation> recommendations) {
+        this.recommendations = recommendations;
     }
 
     public String getPicture() {
@@ -105,14 +124,7 @@ public class Movie implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("id = ");
-        builder.append(this.getId());
-        builder.append(" name = ");
-        builder.append(this.getName());
-        builder.append(" year = ");
-        builder.append(this.getYear());
-        return builder.toString();
+        return "id = " + this.getId() + " name = " + this.getName() + " year = " + this.getYear();
     }
 
     public int getId() {

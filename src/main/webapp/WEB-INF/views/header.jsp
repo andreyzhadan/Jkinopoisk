@@ -12,7 +12,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.0.3.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/multizoom.js"/>"></script>
-    <link type="text/css" href="<c:url value="/resources/css/bootstrap.css"/>" rel="stylesheet">
+    <script type="text/javascript" src="<c:url value="/resources/js/chosen.jquery.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/chosen.proto.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+    <link type="text/css" href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link type="text/css" href="<c:url value="/resources/css/bootstrap-responsive.min.css"/>" rel="stylesheet">
+    <link type="text/css" href="<c:url value="/resources/css/chosen.min.css"/>" rel="stylesheet">
     <link type="text/css" href="<c:url value="/resources/css/jkinopoisk.css"/>" rel="stylesheet">
     <link type="text/css" href="<c:url value="/resources/css/multizoom.css"/>" rel="stylesheet">
     <script type="text/javascript">
@@ -23,7 +28,8 @@
                 magnifierpos: 'right',
                 cursorshade: true,
                 largeimage: '${movie.picture}' //<-- No comma after last option!
-            })
+            });
+            $(".chosen").chosen();
         });
     </script>
 </head>
@@ -32,9 +38,9 @@
         <sec:authorize access="isAuthenticated()">
             <ul class="nav">
                 <li>
-                    <a href="<c:url value="/home"/>"/>
-                    <i class="icon-home"></i>
-                    Home
+                    <a href="<c:url value="/home"/>">
+                        <i class="icon-home"></i>
+                        Home
                     </a>
                 </li>
                 <li>
@@ -47,6 +53,11 @@
                         Actors
                     </a>
                 </li>
+                <li>
+                    <a href="<c:url value="/recommendations"/>">
+                        Recommendations
+                    </a>
+                </li>
             </ul>
             <ul class="nav nav-pills pull-right">
                 <li>
@@ -56,7 +67,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/j_spring_security_logout">
+                    <a href="<c:url value="/j_spring_security_logout"/>">
                         <i class="icon-off"></i>
                         Sign Out
                     </a>
@@ -66,13 +77,13 @@
         <sec:authorize access="!isAuthenticated()">
             <ul class="nav nav-pills pull-right">
                 <li>
-                    <a href="/spring_security_login">
+                    <a href="<c:url value="/spring_security_login"/>">
                         SignIn
                     </a>
                 </li>
                 <li>
-                    <a href="/signUp"/>
-                    SignUp
+                    <a href="<c:url value="/signUp"/>">
+                        SignUp
                     </a>
                 </li>
             </ul>
